@@ -104,12 +104,14 @@ public class GameManagerGUI {
         JLabel releaseDateLabel = new JLabel("Release Date (yyyy-mm-dd):");
         JTextField releaseDateField = new JTextField();
         JLabel tagsLabel = new JLabel("Tags:");
-        JComboBox<String> tagsComboBox = new JComboBox<>();
+        JPanel tagsPanel = new JPanel();
+        List<JCheckBox> tagsCheckBoxList = new ArrayList<JCheckBox>();
 
         List<Tag> tagList = tagsManager.getTagList();
         if (tagList != null) {
             for (Tag tag : tagList) {
-                tagsComboBox.addItem(tag.getTagName());
+            	JCheckBox tags = new JCheckBox(tag.getTagName());
+                tagsCheckBoxList.add(tags);
             }
         }
 
@@ -117,11 +119,13 @@ public class GameManagerGUI {
         addTagButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 showAddTagDialog();
-                tagsComboBox.removeAllItems();
+                tagsCheckBoxList.clear();
                 List<Tag> tagList = tagsManager.getTagList();
                 if (tagList != null) {
                     for (Tag tag : tagList) {
-                        tagsComboBox.addItem(tag.getTagName());
+                    	JCheckBox tags = new JCheckBox(tag.getTagName());
+                        tagsCheckBoxList.add(tags);
+                        dialog.dispose();
                     }
                 }
             }
@@ -139,14 +143,20 @@ public class GameManagerGUI {
                     return;
                 }
 
-                String selectedTag = (String) tagsComboBox.getSelectedItem();
+                List<String> selectedTagList = new ArrayList<String>();
+                for (JCheckBox tagCheckBox : tagsCheckBoxList)
+        	        if (tagCheckBox.isSelected()) {
+        	        	selectedTagList.add((String) tagCheckBox.getText());
+        	        }
                 List<Tag> selectedTags = new ArrayList<>();
                 List<Tag> tagList = tagsManager.getTagList();
                 if (tagList != null) {
                     for (Tag tag : tagList) {
-                        if (tag.getTagName().equals(selectedTag)) {
-                            selectedTags.add(tag);
-                        }
+                        for (String tagName : selectedTagList) {
+	                    	if (tag.getTagName().equals(tagName)) {
+	                            selectedTags.add(tag);
+	                        }
+                    	}
                     }
                 }
 
@@ -156,13 +166,17 @@ public class GameManagerGUI {
                 dialog.dispose();
             }
         });
-
+        
+        for(JCheckBox tagCheckBox : tagsCheckBoxList)
+        	tagsPanel.add(tagCheckBox);
+        JScrollPane tagsScrollPane = new JScrollPane(tagsPanel);
+        
         dialog.add(nameLabel);
         dialog.add(nameField);
         dialog.add(releaseDateLabel);
         dialog.add(releaseDateField);
         dialog.add(tagsLabel);
-        dialog.add(tagsComboBox);
+        dialog.add(tagsScrollPane);
         dialog.add(new JLabel());
         dialog.add(addTagButton);
         dialog.add(new JLabel()); // Empty cell
@@ -203,32 +217,42 @@ public class GameManagerGUI {
 
     private void showDeleteTagDialog() {
         JDialog dialog = new JDialog(frame, "Delete Tag", true);
-        dialog.setLayout(new GridLayout(3, 2));
+        dialog.setLayout(new GridLayout(2, 2));
         dialog.setSize(300, 150);
 
         JLabel nameLabel = new JLabel("Tag Name:");
-        JComboBox<String> tagsComboBox = new JComboBox<>();
+        JPanel tagsPanel = new JPanel();
+        List<JCheckBox> tagsCheckBoxList = new ArrayList<JCheckBox>();
 
         List<Tag> tagList = tagsManager.getTagList();
         if (tagList != null) {
             for (Tag tag : tagList) {
-                tagsComboBox.addItem(tag.getTagName());
+            	JCheckBox tags = new JCheckBox(tag.getTagName());
+                tagsCheckBoxList.add(tags);
             }
         }
 
         JButton deleteButton = new JButton("Delete");
         deleteButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                String selectedTag = (String) tagsComboBox.getSelectedItem();
-                if (selectedTag != null) {
-                    tagsManager.deleteTag(selectedTag);
-                    dialog.dispose();
-                }
+            	List<String> selectedTagList = new ArrayList<String>();
+            	for (JCheckBox tagsCheckBox : tagsCheckBoxList)
+        	        if (tagsCheckBox.isSelected())
+        	        	selectedTagList.add((String) tagsCheckBox.getText());
+	                for (String tagName : selectedTagList)
+	            		if (tagName != null) {
+		                    tagsManager.deleteTag(tagName);
+		                    dialog.dispose();
+		                }
             }
         });
-
+        
+        for(JCheckBox tagsCheckBox : tagsCheckBoxList)
+        	tagsPanel.add(tagsCheckBox);
+        JScrollPane tagsScrollPane = new JScrollPane(tagsPanel);
+        
         dialog.add(nameLabel);
-        dialog.add(tagsComboBox);
+        dialog.add(tagsScrollPane);
         dialog.add(new JLabel()); // Empty cell
         dialog.add(deleteButton);
 
