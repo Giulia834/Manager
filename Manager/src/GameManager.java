@@ -18,11 +18,14 @@ import java.util.List;
  */
 public class GameManager {
 	List<Game> gameList = new ArrayList<Game>();
+	List<Tag> selectedTags = new ArrayList<Tag>();
+	boolean tagFilter = false;
 	/**
      * Constructs a new Game Manager object and loads the game list.
      */
 	public GameManager() {
 		loadGames();
+		resetSelectedTags();
 	}
 	
 	/**
@@ -67,12 +70,32 @@ public class GameManager {
 	 * @return gameList A list of object Game
 	 */
 	public List<Game> getGameList() {
-		return gameList;
+		List<Game> gameListAux = new ArrayList<Game>(gameList);
+		if(tagFilter) {			
+			for(Game game: gameList) {
+				boolean selectGame = false;
+				for(Tag tag: selectedTags) {
+					if(game.getTags().contains(tag)) {
+						selectGame = true;
+						break;
+					}
+				}
+				if(selectGame == false)
+					gameListAux.remove(game);
+			}
+		}
+		return gameListAux;
 	}
 	 
 	/**
 	 * loads the game list from a serialized file
 	 */
+	private void resetSelectedTags() {
+		for(Game game: gameList)
+			for(Tag tag: game.getTags())
+				if(!selectedTags.contains(tag))
+					selectedTags.add(tag);
+	}
 	private void loadGames() {
 		  try (FileInputStream fileIn = new FileInputStream("gameManager.ser");
 		        ObjectInputStream in = new ObjectInputStream(fileIn)) {
@@ -112,8 +135,9 @@ public class GameManager {
 
 	    return i+1;
 	}
-	public void sortAlgorithm() {
-		
+	public void filterByTag(List<Tag> selectedTags) {
+		this.selectedTags = selectedTags;
+		tagFilter = true;
 	}
 }
 
