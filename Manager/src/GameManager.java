@@ -1,4 +1,4 @@
-package Manager;
+
 
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
@@ -7,6 +7,7 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 /**
@@ -82,6 +83,37 @@ public class GameManager {
 		            System.out.println("Tag class not found");
 		            c.printStackTrace();
 		        }
+	}
+	public void sort(int criterea) {
+		quickSort(0, gameList.size(), criterea);
+	}
+	private void quickSort(int begin, int end, int criterea) {
+	    if (begin < end) {
+	        int partitionIndex = partition(begin, end, criterea);
+
+	        quickSort(begin, partitionIndex-1, criterea);
+	        quickSort(partitionIndex+1, end, criterea);
+	    }
+	}
+	private int partition(int begin, int end, int criterea) {
+	    Game pivot = gameList.get(end);
+	    int i = (begin-1);
+
+	    for (int j = begin; j < end; j++) {
+	        if (gameList.get(j).compare(pivot, criterea)) {
+	            i++;
+
+	            
+	            Collections.swap(gameList, i, j);
+	        }
+	    }
+
+	    Collections.swap(gameList, i + 1, end);
+
+	    return i+1;
+	}
+	public void sortAlgorithm() {
+		
 	}
 }
 

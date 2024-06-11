@@ -1,7 +1,7 @@
 /**
  * Package Manager contains classes related to managing games.
  */
-package Manager;
+
 
 import java.io.Serializable;
 import java.time.LocalDate;
@@ -77,5 +77,14 @@ public class Game implements Serializable {
         this.tags = tags;
         this.releaseDate = releaseDate;
         this.dateAdded = LocalDateTime.now();
+    }
+    public boolean  compare(Game game, int criterea) {
+    	if(criterea == 0)
+    		return this.name.compareTo(name) >= 0;
+    	if(criterea == 1)
+    		return this.releaseDate.compareTo(game.releaseDate)  >= 0;
+    	if(criterea == 2)
+    		return this.dateAdded.compareTo(game.dateAdded)  >= 0;
+    	return false; 		
     }
 }
