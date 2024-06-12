@@ -35,22 +35,29 @@ public class GameManagerGUI {
         JPanel gamePanel = new JPanel(new FlowLayout());
         JButton addGameButton = new JButton("Add Game");
         JButton deleteGameButton = new JButton("Delete Game");
+        // Search
+        JTextField search = new JTextField();
+        JButton searchButton = new JButton("Search");
         gamePanel.add(addGameButton);
         gamePanel.add(deleteGameButton);
         mainPanel.add(gamePanel);
+        
+        
 
-        // Tag Management Panel
-        JPanel tagPanel = new JPanel(new FlowLayout());
+        // Game Management main Panel
+        JPanel gamePane1 = new JPanel(new FlowLayout());
         JButton addTagButton = new JButton("Add Tag");
         JButton deleteTagButton = new JButton("Delete Tag");
         JButton saveButton = new JButton("Save");
-        tagPanel.add(addTagButton);
-        tagPanel.add(deleteTagButton);
-        tagPanel.add(saveButton);
-        mainPanel.add(tagPanel);
+        gamePanel.add(addTagButton);
+        gamePanel.add(deleteTagButton);
+        gamePanel.add(saveButton);
+        mainPanel.add(gamePanel);
+        mainPanel.add(search);
+        mainPanel.add(searchButton);
        
         
-        tagPanel.add(CheckBoxPanel.tagFilterPanel(tagsManager, gameManager, this));
+        gamePanel.add(CheckBoxPanel.tagFilterPanel(tagsManager, gameManager, this));
         frame.add(mainPanel, BorderLayout.NORTH);
         
         // Table for displaying games
@@ -91,7 +98,13 @@ public class GameManagerGUI {
                 gameManager.saveGames();
             }
         });
-        
+        searchButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+            	String gameName = search.getText();
+                gameManager.searchGame(gameName);
+                updateGameTable();
+            }
+        });
         frame.setVisible(true);
         updateGameTable();
     }
@@ -125,6 +138,7 @@ public class GameManagerGUI {
                 }
             }
         });
+       
 
         JButton addButton = new JButton("Add");
         addButton.addActionListener(new ActionListener() {
@@ -156,7 +170,7 @@ public class GameManagerGUI {
                 }
 
                 Game game = new Game(name, selectedTags, releaseDate);
-                gameManager.addGame(game);
+                gameManager.gameList.addGame(game);
                 updateGameTable();
                 dialog.dispose();
             }
@@ -179,6 +193,7 @@ public class GameManagerGUI {
 
         dialog.setVisible(true);
     }
+    
 
     private void showAddTagDialog() {
         JDialog dialog = new JDialog(frame, "Add Tag", true);
@@ -254,11 +269,12 @@ public class GameManagerGUI {
         dialog.setVisible(true);
     }
 
+    
     private void deleteSelectedGame(JTable gameTable) {
         int selectedRow = gameTable.getSelectedRow();
         if (selectedRow != -1) {
             String gameName = (String) gameTable.getValueAt(selectedRow, 0);
-            gameManager.deleteGame(gameName);
+            gameManager.gameList.deleteGame(gameName);
             updateGameTable();
         }
     }

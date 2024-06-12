@@ -10,6 +10,8 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+import javax.swing.JOptionPane;
+
 /**
  * Represents a manager system for class Game
  *
@@ -17,8 +19,10 @@ import java.util.List;
  * @author Giulia Mendes
  */
 public class GameManager {
-	List<Game> gameList = new ArrayList<Game>();
+	GameList gameList = new GameList();
+	List<Game> searchGameList = new ArrayList<Game>();
 	List<Tag> selectedTags = new ArrayList<Tag>();
+	boolean showShearchList = false;
 	boolean tagFilter = false;
 	/**
      * Constructs a new Game Manager object and loads the game list.
@@ -28,29 +32,7 @@ public class GameManager {
 		resetSelectedTags();
 	}
 	
-	/**
-	 * add game to the game list
-	 * @param game Game object
-	 */
-	public void addGame(Game game) {
-		gameList.add(game);
-	}
-	/**
-
-    * Attempt to remove the specified game from the game list. If successful, return true; otherwise, return false.
-    * @param gameName A string representing the name of the game to be removed
-    * @return True if the game was successfully removed from the game list, otherwise false.
-    * @throws java.lang.IllegalArgumentException If the provided argument is incompatible with the expected pattern.
-    */
-	public boolean deleteGame(String gameName) {
-		for (Game game : gameList) {
-			if(game.getName().equals(gameName)) {
-				gameList.remove(game);
-				return true;
-			}
-		}
-		return false;
-}
+	
 	/**
 	 * Saves the game list into a serialized file
 	 * 
@@ -70,9 +52,16 @@ public class GameManager {
 	 * @return gameList A list of object Game
 	 */
 	public List<Game> getGameList() {
-		List<Game> gameListAux = new ArrayList<Game>(gameList);
-		if(tagFilter) {			
-			for(Game game: gameList) {
+		List<Game> gameListAux;
+		if(showShearchList)			
+			gameListAux = new ArrayList<Game>(searchGameList);
+		else
+			gameListAux = new ArrayList<Game>(gameList.gameList);
+		if(tagFilter) {		
+			if(selectedTags.isEmpty())
+				return gameListAux;
+		
+			for(Game game: gameList.gameList) {
 				boolean selectGame = false;
 				for(Tag tag: selectedTags) {
 					for(Tag gameTag: game.getTags()) {
@@ -95,7 +84,7 @@ public class GameManager {
 	 * loads the game list from a serialized file
 	 */
 	private void resetSelectedTags() {
-		for(Game game: gameList)
+		for(Game game: gameList.gameList)
 			for(Tag tag: game.getTags())
 				if(!selectedTags.contains(tag))
 					selectedTags.add(tag);
@@ -103,7 +92,7 @@ public class GameManager {
 	private void loadGames() {
 		  try (FileInputStream fileIn = new FileInputStream("../data/gameManager.ser");
 		        ObjectInputStream in = new ObjectInputStream(fileIn)) {
-		        gameList = (List<Game>) in.readObject();
+		        gameList.gameList = (List<Game>) in.readObject();
 		        } catch (IOException i) {
 		            i.printStackTrace();
 		        } catch (ClassNotFoundException c) {
@@ -111,37 +100,26 @@ public class GameManager {
 		            c.printStackTrace();
 		        }
 	}
-	public void sort(int criterea) {
-		quickSort(0, gameList.size(), criterea);
-	}
-	private void quickSort(int begin, int end, int criterea) {
-	    if (begin < end) {
-	        int partitionIndex = partition(begin, end, criterea);
 
-	        quickSort(begin, partitionIndex-1, criterea);
-	        quickSort(partitionIndex+1, end, criterea);
-	    }
-	}
-	private int partition(int begin, int end, int criterea) {
-	    Game pivot = gameList.get(end);
-	    int i = (begin-1);
-
-	    for (int j = begin; j < end; j++) {
-	        if (gameList.get(j).compare(pivot, criterea)) {
-	            i++;
-
-	            
-	            Collections.swap(gameList, i, j);
-	        }
-	    }
-
-	    Collections.swap(gameList, i + 1, end);
-
-	    return i+1;
-	}
 	public void filterByTag(List<Tag> selectedTags, boolean filter) {
 		this.selectedTags = selectedTags;
 		tagFilter = filter;
 	}
+	 void searchGame(String gameName) {
+		 	if(gameName.equals("") || gameName == null) {
+		 		searchGameList = new ArrayList<Game>(gameList.gameList);
+		 		showShearchList = false;
+		 		return;
+		 	}
+		 	searchGameList = new ArrayList<>();
+		 	for(Game game: gameList.gameList)
+		 		if(game.getName().contains(gameName))
+		 			searchGameList.add(game);
+		 	showShearchList = true;
+	      
+	 
+	       
+	 
+	        
+	    }
 }
-
