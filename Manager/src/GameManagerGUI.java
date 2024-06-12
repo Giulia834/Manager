@@ -21,7 +21,7 @@ public class GameManagerGUI {
         gameManager = new GameManager();
         initialize();
     }
-
+    
     private void initialize() {
         frame = new JFrame("Game Manager");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -48,9 +48,11 @@ public class GameManagerGUI {
         tagPanel.add(deleteTagButton);
         tagPanel.add(saveButton);
         mainPanel.add(tagPanel);
-
+       
+        
+        tagPanel.add(CheckBoxPanel.tagFilterPanel(tagsManager, gameManager, this));
         frame.add(mainPanel, BorderLayout.NORTH);
-
+        
         // Table for displaying games
         String[] columnNames = {"Title", "Release Date", "Date Added", "Tags"};
         tableModel = new DefaultTableModel(columnNames, 0);
@@ -89,7 +91,7 @@ public class GameManagerGUI {
                 gameManager.saveGames();
             }
         });
-
+        
         frame.setVisible(true);
         updateGameTable();
     }
@@ -105,15 +107,8 @@ public class GameManagerGUI {
         JTextField releaseDateField = new JTextField();
         JLabel tagsLabel = new JLabel("Tags:");
         JPanel tagsPanel = new JPanel();
-        List<JCheckBox> tagsCheckBoxList = new ArrayList<JCheckBox>();
-
-        List<Tag> tagList = tagsManager.getTagList();
-        if (tagList != null) {
-            for (Tag tag : tagList) {
-            	JCheckBox tags = new JCheckBox(tag.getTagName());
-                tagsCheckBoxList.add(tags);
-            }
-        }
+        
+        List<JCheckBox> tagsCheckBoxList = CheckBoxPanel.checkBoxList(tagsManager);
 
         JButton addTagButton = new JButton("New Tag");
         addTagButton.addActionListener(new ActionListener() {
@@ -268,7 +263,7 @@ public class GameManagerGUI {
         }
     }
 
-    private void updateGameTable() {
+    void updateGameTable() {
         tableModel.setRowCount(0);
         List<Game> gameList = gameManager.getGameList();
         if (gameList != null) {

@@ -56,7 +56,7 @@ public class GameManager {
 	 * 
 	 */
     public void saveGames() {
-        try (FileOutputStream fileOut = new FileOutputStream("gameManager.ser");
+        try (FileOutputStream fileOut = new FileOutputStream("../data/gameManager.ser");
              ObjectOutputStream out = new ObjectOutputStream(fileOut)) {
             out.writeObject(getGameList());
             System.out.println("Serialized data is saved in gameTags.ser");
@@ -75,12 +75,16 @@ public class GameManager {
 			for(Game game: gameList) {
 				boolean selectGame = false;
 				for(Tag tag: selectedTags) {
-					if(game.getTags().contains(tag)) {
-						selectGame = true;
-						break;
+					for(Tag gameTag: game.getTags()) {
+						if(gameTag.getTagName().equals(tag.getTagName())) {
+							selectGame = true;
+							break;
+						}
 					}
+					if(selectGame)
+						break;
 				}
-				if(selectGame == false)
+				if(!selectGame)
 					gameListAux.remove(game);
 			}
 		}
@@ -97,7 +101,7 @@ public class GameManager {
 					selectedTags.add(tag);
 	}
 	private void loadGames() {
-		  try (FileInputStream fileIn = new FileInputStream("gameManager.ser");
+		  try (FileInputStream fileIn = new FileInputStream("../data/gameManager.ser");
 		        ObjectInputStream in = new ObjectInputStream(fileIn)) {
 		        gameList = (List<Game>) in.readObject();
 		        } catch (IOException i) {
@@ -135,9 +139,9 @@ public class GameManager {
 
 	    return i+1;
 	}
-	public void filterByTag(List<Tag> selectedTags) {
+	public void filterByTag(List<Tag> selectedTags, boolean filter) {
 		this.selectedTags = selectedTags;
-		tagFilter = true;
+		tagFilter = filter;
 	}
 }
 
