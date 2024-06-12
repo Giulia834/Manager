@@ -50,7 +50,7 @@ public class GameList {
 		
 	}
 	public void sort(int criterea) {
-		quickSort(0, gameList.size(), criterea);
+		quickSort(0, gameList.size()-1, criterea);
 	}
 	private void quickSort(int begin, int end, int criterea) {
 	    if (begin < end) {

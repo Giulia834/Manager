@@ -29,20 +29,27 @@ public class GameManagerGUI {
         frame.setLayout(new BorderLayout());
 
         // Main Panel
-        JPanel mainPanel = new JPanel(new GridLayout(2, 1));
+        JPanel mainPanel = new JPanel(new GridLayout(3, 1));
 
         // Game Management Panel
         JPanel gamePanel = new JPanel(new FlowLayout());
         JButton addGameButton = new JButton("Add Game");
         JButton deleteGameButton = new JButton("Delete Game");
         // Search
-        JTextField searchTextField = new JTextField();
+        JPanel searchPanel = new JPanel(new FlowLayout());
+        JTextField searchTextField = new JTextField(20);
         JButton searchButton = new JButton("Search");
+        searchPanel.add(searchTextField);
+        searchPanel.add(searchButton);
         gamePanel.add(addGameButton);
         gamePanel.add(deleteGameButton);
         mainPanel.add(gamePanel);
         
-        
+        JPanel filtersPanel = new JPanel(new FlowLayout());
+        JComboBox<String> filtersComboBox = new JComboBox<String>(new String[] {"A-Z","Z-A","Release Date","Date Added"});
+        JComboBox<String> playedComboBox = new JComboBox<String>(new String[] {"All","Played","Not Played"});
+        filtersPanel.add(filtersComboBox);
+        filtersPanel.add(playedComboBox);
 
         // Game Management main Panel
         JPanel gamePane1 = new JPanel(new FlowLayout());
@@ -53,9 +60,9 @@ public class GameManagerGUI {
         gamePanel.add(deleteTagButton);
         gamePanel.add(saveButton);
         mainPanel.add(gamePanel);
-        mainPanel.add(searchTextField);
-        mainPanel.add(searchButton);
+        mainPanel.add(searchPanel);
        
+        mainPanel.add(filtersPanel);
         
         gamePanel.add(CheckBoxPanel.tagFilterPanel(tagsManager, gameManager, this));
         frame.add(mainPanel, BorderLayout.NORTH);
@@ -104,6 +111,34 @@ public class GameManagerGUI {
                 gameManager.searchGame(gameName);
                 updateGameTable();
             }
+        });
+        
+        filtersComboBox.addActionListener(new ActionListener() {
+        	public void actionPerformed(ActionEvent e) {
+        		if (filtersComboBox.getSelectedItem().equals("A-Z")) {
+        			gameManager.gameList.sort(0);
+        			updateGameTable();
+        		}
+        		else if (filtersComboBox.getSelectedItem().equals("Z-A")) {
+        			gameManager.gameList.sort(3);
+        			updateGameTable();
+        		}
+        		else if (filtersComboBox.getSelectedItem().equals("Release Date")) {
+        			gameManager.gameList.sort(1);
+        			updateGameTable();
+        		}
+        		else {
+        			gameManager.gameList.sort(2);
+        			updateGameTable();
+        		}
+        	}
+        });
+        
+        playedComboBox.addActionListener(new ActionListener() {
+        	public void actionPerformed(ActionEvent e) {
+        		gameManager.filterByPlayed(playedComboBox.getSelectedItem().toString());
+        		updateGameTable();
+        	}
         });
         
         frame.setVisible(true);
