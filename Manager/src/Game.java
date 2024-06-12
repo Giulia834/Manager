@@ -17,6 +17,7 @@ public class Game implements Serializable {
     private List<Tag> tags;
     private LocalDate releaseDate;
     private LocalDateTime dateAdded;
+    private boolean played;
 
     /**
      * Retrieves the name of the game.
@@ -72,12 +73,18 @@ public class Game implements Serializable {
      * @param tags The list of tags associated with the game.
      * @param releaseDate The release date of the game.
      */
-    public Game(String name, List<Tag> tags, LocalDate releaseDate) {
+    public Game(String name, List<Tag> tags, LocalDate releaseDate, boolean played) {
         this.name = name;
         this.tags = tags;
         this.releaseDate = releaseDate;
         this.dateAdded = LocalDateTime.now();
+        this.played = played;
     }
+ 
+    public boolean getPlayed() {
+    	return played;
+    }
+    
     public boolean  compare(Game game, int criterea) {
     	if(criterea == 0)
     		return this.name.compareTo(name) >= 0;

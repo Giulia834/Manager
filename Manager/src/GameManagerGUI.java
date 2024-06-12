@@ -36,7 +36,7 @@ public class GameManagerGUI {
         JButton addGameButton = new JButton("Add Game");
         JButton deleteGameButton = new JButton("Delete Game");
         // Search
-        JTextField search = new JTextField();
+        JTextField searchTextField = new JTextField();
         JButton searchButton = new JButton("Search");
         gamePanel.add(addGameButton);
         gamePanel.add(deleteGameButton);
@@ -53,7 +53,7 @@ public class GameManagerGUI {
         gamePanel.add(deleteTagButton);
         gamePanel.add(saveButton);
         mainPanel.add(gamePanel);
-        mainPanel.add(search);
+        mainPanel.add(searchTextField);
         mainPanel.add(searchButton);
        
         
@@ -61,7 +61,7 @@ public class GameManagerGUI {
         frame.add(mainPanel, BorderLayout.NORTH);
         
         // Table for displaying games
-        String[] columnNames = {"Title", "Release Date", "Date Added", "Tags"};
+        String[] columnNames = {"Title", "Release Date", "Date Added", "Tags", "Played"};
         tableModel = new DefaultTableModel(columnNames, 0);
         JTable gameTable = new JTable(tableModel);
         JScrollPane scrollPane = new JScrollPane(gameTable);
@@ -100,11 +100,12 @@ public class GameManagerGUI {
         });
         searchButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-            	String gameName = search.getText();
+            	String gameName = searchTextField.getText();
                 gameManager.searchGame(gameName);
                 updateGameTable();
             }
         });
+        
         frame.setVisible(true);
         updateGameTable();
     }
@@ -121,11 +122,14 @@ public class GameManagerGUI {
         JLabel tagsLabel = new JLabel("Tags:");
         JPanel tagsPanel = new JPanel();
         
+        JCheckBox playedCheckBox = new JCheckBox("Played");
+        
+        
         List<JCheckBox> tagsCheckBoxList = CheckBoxPanel.checkBoxList(tagsManager);
 
         JButton addTagButton = new JButton("New Tag");
         addTagButton.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
+           public void actionPerformed(ActionEvent e) {
                 showAddTagDialog();
                 tagsCheckBoxList.clear();
                 List<Tag> tagList = tagsManager.getTagList();
@@ -145,6 +149,7 @@ public class GameManagerGUI {
             public void actionPerformed(ActionEvent e) {
                 String name = nameField.getText();
                 LocalDate releaseDate = null;
+                boolean played = playedCheckBox.isSelected();
                 try {
                     releaseDate = LocalDate.parse(releaseDateField.getText());
                 } catch (DateTimeParseException ex) {
@@ -169,7 +174,7 @@ public class GameManagerGUI {
                     }
                 }
 
-                Game game = new Game(name, selectedTags, releaseDate);
+                Game game = new Game(name, selectedTags, releaseDate, played);
                 gameManager.gameList.addGame(game);
                 updateGameTable();
                 dialog.dispose();
@@ -189,6 +194,7 @@ public class GameManagerGUI {
         dialog.add(new JLabel());
         dialog.add(addTagButton);
         dialog.add(new JLabel()); // Empty cell
+        dialog.add(playedCheckBox);
         dialog.add(addButton);
 
         dialog.setVisible(true);
@@ -285,7 +291,7 @@ public class GameManagerGUI {
         if (gameList != null) {
             for (Game game : gameList) {
                 String tags = game.getTags() != null ? game.getTags().toString() : "";
-                tableModel.addRow(new Object[]{game.getName(), game.getReleaseDate(), game.getDateAdded(), tags});
+                tableModel.addRow(new Object[]{game.getName(), game.getReleaseDate(), game.getDateAdded(), tags, game.getPlayed()});
             }
         }
     }

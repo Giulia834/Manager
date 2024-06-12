@@ -24,6 +24,7 @@ public class GameManager {
 	List<Tag> selectedTags = new ArrayList<Tag>();
 	boolean showShearchList = false;
 	boolean tagFilter = false;
+	int playedFilter = 0;
 	/**
      * Constructs a new Game Manager object and loads the game list.
      */
@@ -77,6 +78,18 @@ public class GameManager {
 					gameListAux.remove(game);
 			}
 		}
+		if(playedFilter != 0) {
+			if(playedFilter==1) {
+				for(Game game: gameList.gameList)
+					if(!game.getPlayed()) 
+						gameListAux.remove(game);
+			}
+			else {
+				for(Game game: gameList.gameList)
+					if(game.getPlayed()) 
+						gameListAux.remove(game);
+			}
+		}
 		return gameListAux;
 	}
 	 
@@ -105,7 +118,15 @@ public class GameManager {
 		this.selectedTags = selectedTags;
 		tagFilter = filter;
 	}
-	 void searchGame(String gameName) {
+	public void filterByPlayed(String p) {
+		if(p.equals("All"))
+			playedFilter = 0;
+		else if(p.equals("Played"))
+			playedFilter = 1;
+		else
+			playedFilter = -1;
+	}
+	 public void searchGame(String gameName) {
 		 	if(gameName.equals("") || gameName == null) {
 		 		searchGameList = new ArrayList<Game>(gameList.gameList);
 		 		showShearchList = false;
@@ -116,10 +137,6 @@ public class GameManager {
 		 		if(game.getName().contains(gameName))
 		 			searchGameList.add(game);
 		 	showShearchList = true;
-	      
-	 
-	       
-	 
 	        
 	    }
 }
