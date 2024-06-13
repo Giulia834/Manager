@@ -6,8 +6,17 @@ import javax.swing.SwingConstants;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.TableCellRenderer;
 
+/**
+ * 
+ * 
+ * @author Juan Santana
+ * @author Giulia Mendes
+ */
 public class EmojiRenderer extends DefaultTableCellRenderer {
-    @Override
+    /**
+     * 
+     */
+	@Override
     public Component getTableCellRendererComponent(JTable table, Object value,
                                                    boolean isSelected, boolean hasFocus, int row, int column) {
         JLabel label = (JLabel) super.getTableCellRendererComponent(table, value, isSelected, hasFocus, row, column);
