@@ -33,12 +33,12 @@ public class GameManagerGUI {
 
         // Game Management Panel
         JPanel gamePanel = new JPanel(new FlowLayout());
-        JButton addGameButton = new JButton("Add Game");
-        JButton deleteGameButton = new JButton("Delete Game");
+        JButton addGameButton = CustomButton.createButton("Add game", 100, 50);
+        JButton deleteGameButton = CustomButton.createButton("Delet game", 100, 50);
         // Search
         JPanel searchPanel = new JPanel(new FlowLayout());
         JTextField searchTextField = new JTextField(20);
-        JButton searchButton = new JButton("Search");
+        JButton searchButton = CustomButton.createButton("Search", 100, 30);
         searchPanel.add(searchTextField);
         searchPanel.add(searchButton);
         gamePanel.add(addGameButton);
@@ -53,9 +53,9 @@ public class GameManagerGUI {
 
         // Game Management main Panel
         JPanel gamePane1 = new JPanel(new FlowLayout());
-        JButton addTagButton = new JButton("Add Tag");
-        JButton deleteTagButton = new JButton("Delete Tag");
-        JButton saveButton = new JButton("Save");
+        JButton addTagButton = CustomButton.createButton("Add tag", 100, 50);
+        JButton deleteTagButton = CustomButton.createButton("Delet Tag", 100, 50);
+        JButton saveButton = CustomButton.createButton("Save", 100, 50);
         gamePanel.add(addTagButton);
         gamePanel.add(deleteTagButton);
         gamePanel.add(saveButton);
