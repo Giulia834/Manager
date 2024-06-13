@@ -18,8 +18,13 @@ public class GameList {
 	public GameList(List<Game> gameList) {
 		this.gameList = gameList;
 	}
-	public void addGame(Game game) {
+	public boolean addGame(Game game) {
+		for (Game gameInList: gameList) {
+			if (gameInList.getName().equals(game.getName()))
+				return false;
+		}
 		gameList.add(game);
+		return true;
 	}
 	/**
 
