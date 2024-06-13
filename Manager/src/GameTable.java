@@ -21,6 +21,7 @@ public class GameTable {
     }
     public void updateGameTable(GameManager gameManager ) {
         tableModel.setRowCount(0);
+        System.out.println("aaaaa");
         List<Game> gameList = gameManager.getGameList();
         if (gameList != null) {
             for (Game game : gameList) {

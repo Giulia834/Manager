@@ -33,6 +33,7 @@ public class GameManagerGUI {
     public GameManagerGUI() {
         tagsManager = new TagManager();
         gameManager = new GameManager();
+        gt = new GameTable();
         initialize();
     }
     
@@ -116,7 +117,6 @@ public class GameManagerGUI {
         
         // Table for displaying games
         String[] columnNames = {"Title", "Release Date", "Date Added", "Tags", "Played"};
-        gt = new GameTable();
         JTable gameTable = gt.createTable();
         gameTable.getColumnModel().getColumn(4).setCellRenderer(new EmojiRenderer());
         JScrollPane scrollPane = new JScrollPane(gameTable);
@@ -323,15 +323,26 @@ public class GameManagerGUI {
      */
     private void showAddTagDialog() {
         JDialog dialog = new JDialog(frame, "Add Tag", true);
-        dialog.setLayout(new GridLayout(3, 2));
-        dialog.setSize(300, 150);
+   
+       
+        dialog.setSize(500, 250);
+        dialog.setBackground(backgroundColor);
+        
+        JPanel addTagPanel = new JPanel();
+        addTagPanel.setLayout(new GridLayout(3, 2));
 
         JLabel nameLabel = new JLabel("Tag Name:");
-        JTextField nameField = new JTextField();
+        nameLabel.setBackground(backgroundColor);
+        JPanel useless = new JPanel();
+        JTextField nameField = new RoundTextField(10);
+        nameField.setBorder(new EmptyBorder(2, 2, 2, 0));
+        
         JLabel descriptionLabel = new JLabel("Description:");
-        JTextField descriptionField = new JTextField();
-
-        JButton addButton = new JButton("Add");
+        JTextField descriptionField = new RoundTextField(20);
+        JPanel fieldPanel = new JPanel();
+        fieldPanel.add(descriptionField);
+        fieldPanel.add(nameField);
+        JButton addButton = CustomButton.createButton("Add", 200, 50);
         addButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 String name = nameField.getText();
@@ -343,14 +354,19 @@ public class GameManagerGUI {
                 dialog.dispose();
             }
         });
-
-        dialog.add(nameLabel);
-        dialog.add(nameField);
-        dialog.add(descriptionLabel);
-        dialog.add(descriptionField);
-        dialog.add(new JLabel()); // Empty cell
-        dialog.add(addButton);
-
+        JPanel aux = new JPanel();
+        aux.add(addButton);
+        addButton.setBorder(new EmptyBorder(2, 2, 2, 0));
+        aux.setBackground(backgroundColor);
+        addTagPanel.add(nameLabel);
+        addTagPanel.add(nameField);
+        addTagPanel.add(descriptionLabel);
+        addTagPanel.add(descriptionField);
+        addTagPanel.add(new JLabel()); // Empty cell
+        addTagPanel.add(aux);
+        
+        dialog.setContentPane(addTagPanel);
+        dialog.getContentPane().setBackground(backgroundColor);
         dialog.setVisible(true);
     }
     
