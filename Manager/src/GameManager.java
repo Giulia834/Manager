@@ -102,7 +102,6 @@ public class GameManager {
 				if(!selectedTags.contains(tag))
 					selectedTags.add(tag);
 	}
-	
 	private void loadGames() {
 		  try (FileInputStream fileIn = new FileInputStream("../data/gameManager.ser");
 		        ObjectInputStream in = new ObjectInputStream(fileIn)) {
@@ -119,7 +118,6 @@ public class GameManager {
 		this.selectedTags = selectedTags;
 		tagFilter = filter;
 	}
-	
 	public void filterByPlayed(String p) {
 		if(p.equals("All"))
 			playedFilter = 0;
@@ -128,17 +126,17 @@ public class GameManager {
 		else
 			playedFilter = -1;
 	}
-	
-	public void searchGame(String gameName) {
-		 if(gameName.equals("") || gameName == null) {
-		 	searchGameList = new ArrayList<Game>(gameList.gameList);
-		 	showShearchList = false;
-		 	return;
-		 }
-		 searchGameList = new ArrayList<>();
-		 for(Game game: gameList.gameList)
-		 	if(game.getName().toLowerCase().contains(gameName.toLowerCase()))
-		 		searchGameList.add(game);
-		 showShearchList = true;    
-	}
+	 public void searchGame(String gameName) {
+		 	if(gameName.equals("") || gameName == null) {
+		 		searchGameList = new ArrayList<Game>(gameList.gameList);
+		 		showShearchList = false;
+		 		return;
+		 	}
+		 	searchGameList = new ArrayList<>();
+		 	for(Game game: gameList.gameList)
+		 		if(game.getName().contains(gameName))
+		 			searchGameList.add(game);
+		 	showShearchList = true;
+	        
+	    }
 }
