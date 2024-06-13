@@ -210,7 +210,8 @@ public class GameManagerGUI {
                 }
 
                 Game game = new Game(name, selectedTags, releaseDate, played);
-                gameManager.gameList.addGame(game);
+                if (!gameManager.gameList.addGame(game))
+                	JOptionPane.showMessageDialog(dialog, "This game is already in the list.", "Error", JOptionPane.ERROR_MESSAGE);
                 updateGameTable();
                 dialog.dispose();
             }
