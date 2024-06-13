@@ -1,6 +1,7 @@
 
 
 import javax.swing.*;
+import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -27,50 +28,53 @@ public class GameManagerGUI {
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setSize(800, 600);
         frame.setLayout(new BorderLayout());
-
-        // Main Panel
-        JPanel mainPanel = new JPanel(new GridLayout(3, 1));
+        
+        // Filters and tags Panel
+        JPanel leftPanel = new JPanel(new BorderLayout());
 
         // Game Management Panel
         JPanel gamePanel = new JPanel(new FlowLayout());
         JButton addGameButton = new JButton("Add Game");
         JButton deleteGameButton = new JButton("Delete Game");
+        gamePanel.add(addGameButton);
+        gamePanel.add(deleteGameButton);
+        
         // Search
         JPanel searchPanel = new JPanel(new FlowLayout());
         JTextField searchTextField = new JTextField(20);
         JButton searchButton = new JButton("Search");
         searchPanel.add(searchTextField);
         searchPanel.add(searchButton);
-        gamePanel.add(addGameButton);
-        gamePanel.add(deleteGameButton);
-        mainPanel.add(gamePanel);
         
-        JPanel filtersPanel = new JPanel(new FlowLayout());
-        JComboBox<String> filtersComboBox = new JComboBox<String>(new String[] {"A-Z","Z-A","Release Date","Date Added"});
+        // Filters
+        JPanel filtersPanel = new JPanel();
+        filtersPanel.setLayout(new BoxLayout(filtersPanel, BoxLayout.Y_AXIS));
+        JComboBox<String> filtersComboBox = new JComboBox<String>(new String[] {"Default", "A-Z","Z-A","Release Date","Date Added"});
         JComboBox<String> playedComboBox = new JComboBox<String>(new String[] {"All","Played","Not Played"});
         filtersPanel.add(filtersComboBox);
+        filtersPanel.add(new JPanel());
         filtersPanel.add(playedComboBox);
+        filtersPanel.add(new JPanel());
+        leftPanel.add(filtersPanel, BorderLayout.NORTH);
 
         // Game Management main Panel
-        JPanel gamePane1 = new JPanel(new FlowLayout());
         JButton addTagButton = new JButton("Add Tag");
         JButton deleteTagButton = new JButton("Delete Tag");
         JButton saveButton = new JButton("Save");
         gamePanel.add(addTagButton);
         gamePanel.add(deleteTagButton);
         gamePanel.add(saveButton);
-        mainPanel.add(gamePanel);
-        mainPanel.add(searchPanel);
-       
-        mainPanel.add(filtersPanel);
         
-        gamePanel.add(CheckBoxPanel.tagFilterPanel(tagsManager, gameManager, this));
-        frame.add(mainPanel, BorderLayout.NORTH);
+        leftPanel.add((CheckBoxPanel.tagFilterPanel(tagsManager, gameManager, this)), BorderLayout.CENTER);
+        frame.add(searchPanel, BorderLayout.NORTH);
+        frame.add(leftPanel, BorderLayout.WEST);
+        frame.add(gamePanel, BorderLayout.SOUTH);
         
         // Table for displaying games
         String[] columnNames = {"Title", "Release Date", "Date Added", "Tags", "Played"};
         tableModel = new DefaultTableModel(columnNames, 0);
         JTable gameTable = new JTable(tableModel);
+        gameTable.getColumnModel().getColumn(4).setCellRenderer(new EmojiRenderer());
         JScrollPane scrollPane = new JScrollPane(gameTable);
         frame.add(scrollPane, BorderLayout.CENTER);
 
@@ -105,6 +109,7 @@ public class GameManagerGUI {
                 gameManager.saveGames();
             }
         });
+        
         searchButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
             	String gameName = searchTextField.getText();
@@ -127,7 +132,7 @@ public class GameManagerGUI {
         			gameManager.gameList.sort(2);
         			updateGameTable();
         		}
-        		else {
+        		else if (filtersComboBox.getSelectedItem().equals("Date Added")) {
         			gameManager.gameList.sort(3);
         			updateGameTable();
         		}
@@ -211,7 +216,7 @@ public class GameManagerGUI {
 
                 Game game = new Game(name, selectedTags, releaseDate, played);
                 if (!gameManager.gameList.addGame(game))
-                	JOptionPane.showMessageDialog(dialog, "This game is already in the list.", "Error", JOptionPane.ERROR_MESSAGE);
+                	JOptionPane.showMessageDialog(dialog, "This name is already used.", "Error", JOptionPane.ERROR_MESSAGE);
                 updateGameTable();
                 dialog.dispose();
             }

@@ -3,6 +3,7 @@ import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.swing.BoxLayout;
 import javax.swing.JCheckBox;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
@@ -14,6 +15,7 @@ public class CheckBoxPanel {
 		List<JCheckBox> tagsCheckBoxList = checkBoxList(tagManager);
 		filterCheckBox(tagsCheckBoxList, tagManager, gameManager,gameManagerGUI);
       JPanel tagsPanel = new JPanel();
+      tagsPanel.setLayout(new BoxLayout(tagsPanel, BoxLayout.Y_AXIS));
       for(JCheckBox tagCheckBox : tagsCheckBoxList)
       	tagsPanel.add(tagCheckBox);
       JScrollPane tagsScrollPane = new JScrollPane(tagsPanel);
