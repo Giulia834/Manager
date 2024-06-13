@@ -4,10 +4,13 @@ import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.swing.BorderFactory;
 import javax.swing.BoxLayout;
 import javax.swing.JCheckBox;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
+import javax.swing.border.EmptyBorder;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 
@@ -28,12 +31,15 @@ public class CheckBoxPanel {
 	public static JScrollPane tagFilterPanel(TagManager tagManager, GameManager gameManager, GameTable gt, Color backgroundColor) {
 		List<JCheckBox> tagsCheckBoxList = checkBoxList(tagManager,backgroundColor);
 		filterCheckBox(tagsCheckBoxList, tagManager, gameManager,gt);
+		JLabel tagTitle = new JLabel("Tags");
       JPanel tagsPanel = new JPanel();
       tagsPanel.setLayout(new BoxLayout(tagsPanel, BoxLayout.Y_AXIS));
       tagsPanel.setBackground(backgroundColor);
+      tagsPanel.add(tagTitle);
       for(JCheckBox tagCheckBox : tagsCheckBoxList)
       	tagsPanel.add(tagCheckBox);
       JScrollPane tagsScrollPane = new JScrollPane(tagsPanel);
+      tagsScrollPane.setBorder(new EmptyBorder(0,0,0,0));
       
       return tagsScrollPane;
 	}

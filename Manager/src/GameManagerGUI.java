@@ -51,6 +51,8 @@ public class GameManagerGUI {
         // Filters and tags Panel
         JPanel leftPanel = new JPanel(new BorderLayout());
         leftPanel.setBackground(backgroundColor);
+        leftPanel.setOpaque(false);
+        leftPanel.setBorder(BorderFactory.createEmptyBorder(0, 10, 10, 10));
         // Title and search panel
         JPanel upPanel = new JPanel(new GridLayout(2,1));
         upPanel.setBackground(backgroundColor);
@@ -121,7 +123,8 @@ public class GameManagerGUI {
         scrollPane.setBorder(null);
         scrollPane.setBorder(new EmptyBorder(0, 10, 10, 10)); // Remove border from JScrollPane
         scrollPane.getViewport().setOpaque(false); // Ensure the viewport is transparent
-        frame.add(scrollPane, BorderLayout.CENTER);
+        scrollPane.setBackground(backgroundColor);
+        mainPanel.add(scrollPane, BorderLayout.CENTER);
 
         // Button Action Listeners
         addGameButton.addActionListener(new ActionListener() {
@@ -214,7 +217,7 @@ public class GameManagerGUI {
         JCheckBox playedCheckBox = new JCheckBox("Played");
         
         
-        List<JCheckBox> tagsCheckBoxList = CheckBoxPanel.checkBoxList(tagsManager,backgroundColor);
+        List<JCheckBox> tagsCheckBoxList = CheckBoxPanel.checkBoxList(tagsManager,null);
 
         JButton addTagButton = new JButton("New Tag");
         addTagButton.addActionListener(new ActionListener() {
