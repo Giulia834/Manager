@@ -59,8 +59,8 @@ public class GameManagerGUI {
         
         // Title image
         ImageIcon icon = new ImageIcon("../MyGameList.png");
-        JLabel titulo = new JLabel(icon, SwingConstants.CENTER);
-        upPanel.add(titulo);
+        JLabel title = new JLabel(icon, SwingConstants.CENTER);
+        upPanel.add(title);
 
         // Game Management Panel
         JPanel gamePanel = new JPanel(new FlowLayout());
@@ -204,22 +204,41 @@ public class GameManagerGUI {
      */
     private void showAddGameDialog() {
         JDialog dialog = new JDialog(frame, "Add Game", true);
-        dialog.setLayout(new GridLayout(5, 2));
         dialog.setSize(400, 300);
+        
+        JPanel addGamePanel = new JPanel(new GridLayout(5, 2));
 
         JLabel nameLabel = new JLabel("Name:");
-        JTextField nameField = new JTextField();
+        JTextField nameField = new RoundTextField(15);
         JLabel releaseDateLabel = new JLabel("Release Date (yyyy-mm-dd):");
-        JTextField releaseDateField = new JTextField();
+        JTextField releaseDateField = new RoundTextField(15);
         JLabel tagsLabel = new JLabel("Tags:");
         JPanel tagsPanel = new JPanel();
         
         JCheckBox playedCheckBox = new JCheckBox("Played");
+        playedCheckBox.setBackground(backgroundColor);
         
+        JPanel nameFieldPanel = new JPanel();
+        nameFieldPanel.setBackground(backgroundColor);
+        nameFieldPanel.setBorder(new EmptyBorder(10,0,0,0));
+        nameFieldPanel.add(nameField);
         
-        List<JCheckBox> tagsCheckBoxList = CheckBoxPanel.checkBoxList(tagsManager,null);
+        JPanel releaseDateFieldPanel = new JPanel();
+        releaseDateFieldPanel.setBackground(backgroundColor);
+        releaseDateFieldPanel.setBorder(new EmptyBorder(10,0,0,0));
+        releaseDateFieldPanel.add(releaseDateField);
+        
+        JPanel addTagButtonPanel = new JPanel();
+        addTagButtonPanel.setBackground(backgroundColor);
+        addTagButtonPanel.setBorder(new EmptyBorder(0,0,0,0));
+        
+        JPanel addButtonPanel = new JPanel();
+        addButtonPanel.setBackground(backgroundColor);
+        addButtonPanel.setBorder(new EmptyBorder(0,0,0,0));
+        
+        List<JCheckBox> tagsCheckBoxList = CheckBoxPanel.checkBoxList(tagsManager,backgroundColor);
 
-        JButton addTagButton = new JButton("New Tag");
+        JButton addTagButton = CustomButton.createButton("New Tag",150,40);
         addTagButton.addActionListener(new ActionListener() {
            public void actionPerformed(ActionEvent e) {
                 showAddTagDialog();
@@ -234,9 +253,9 @@ public class GameManagerGUI {
                 }
             }
         });
-       
+        addTagButtonPanel.add(addTagButton);
 
-        JButton addButton = new JButton("Add");
+        JButton addButton = CustomButton.createButton("Add",150,40);
         addButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 String name = nameField.getText();
@@ -273,22 +292,29 @@ public class GameManagerGUI {
                 dialog.dispose();
             }
         });
+        addButtonPanel.add(addButton);
         
         for(JCheckBox tagCheckBox : tagsCheckBoxList)
         	tagsPanel.add(tagCheckBox);
+        tagsPanel.setBackground(backgroundColor);
         JScrollPane tagsScrollPane = new JScrollPane(tagsPanel);
+        tagsScrollPane.setBackground(backgroundColor);
+        tagsScrollPane.setBorder(new EmptyBorder(0,0,0,0));
+        tagsScrollPane.getHorizontalScrollBar().setBackground(backgroundColor);
         
-        dialog.add(nameLabel);
-        dialog.add(nameField);
-        dialog.add(releaseDateLabel);
-        dialog.add(releaseDateField);
-        dialog.add(tagsLabel);
-        dialog.add(tagsScrollPane);
-        dialog.add(new JLabel()); // Empty cell
-        dialog.add(addTagButton);
-        dialog.add(playedCheckBox);
-        dialog.add(addButton);
-
+        addGamePanel.add(nameLabel);
+        addGamePanel.add(nameFieldPanel);
+        addGamePanel.add(releaseDateLabel);
+        addGamePanel.add(releaseDateFieldPanel);
+        addGamePanel.add(tagsLabel);
+        addGamePanel.add(tagsScrollPane);
+        addGamePanel.add(new JLabel()); // Empty cell
+        addGamePanel.add(addTagButtonPanel);
+        addGamePanel.add(playedCheckBox);
+        addGamePanel.add(addButtonPanel);
+        
+        dialog.setContentPane(addGamePanel);
+        dialog.getContentPane().setBackground(backgroundColor);
         dialog.setVisible(true);
     }
     
