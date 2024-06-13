@@ -1,3 +1,4 @@
+import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
@@ -24,11 +25,12 @@ public class CheckBoxPanel {
 	 * @param gameManagerGUI
 	 * @return
 	 */
-	public static JScrollPane tagFilterPanel(TagManager tagManager, GameManager gameManager, GameTable gt) {
-		List<JCheckBox> tagsCheckBoxList = checkBoxList(tagManager);
+	public static JScrollPane tagFilterPanel(TagManager tagManager, GameManager gameManager, GameTable gt, Color backgroundColor) {
+		List<JCheckBox> tagsCheckBoxList = checkBoxList(tagManager,backgroundColor);
 		filterCheckBox(tagsCheckBoxList, tagManager, gameManager,gt);
       JPanel tagsPanel = new JPanel();
       tagsPanel.setLayout(new BoxLayout(tagsPanel, BoxLayout.Y_AXIS));
+      tagsPanel.setBackground(backgroundColor);
       for(JCheckBox tagCheckBox : tagsCheckBoxList)
       	tagsPanel.add(tagCheckBox);
       JScrollPane tagsScrollPane = new JScrollPane(tagsPanel);
@@ -41,11 +43,12 @@ public class CheckBoxPanel {
 	 * @param tagManager
 	 * @return
 	 */
-	public static List<JCheckBox> checkBoxList(TagManager tagManager) {
+	public static List<JCheckBox> checkBoxList(TagManager tagManager, Color backgroundColor) {
 		  List<JCheckBox> tagsCheckBoxList = new ArrayList<JCheckBox>();
 	      if (tagManager.getTagList() != null) {
 	          for (Tag tag : tagManager.getTagList()) {
 	          	JCheckBox tagCheckBox = new JCheckBox(tag.getTagName());
+	          	tagCheckBox.setBackground(backgroundColor);
 	            tagsCheckBoxList.add(tagCheckBox);
 	          }
 	      }

@@ -22,6 +22,7 @@ public class GameManagerGUI {
     private TagManager tagsManager;
     private GameManager gameManager;
     private DefaultTableModel tableModel;
+    private Color backgroundColor = new Color(120,139,171);
     
     private GameTable gt;
 
@@ -43,10 +44,15 @@ public class GameManagerGUI {
         frame.setSize(800, 600);
         frame.setLayout(new BorderLayout());
         
+        // Main Panel
+        JPanel mainPanel = new JPanel(new BorderLayout());
+        mainPanel.setBackground(backgroundColor);
         // Filters and tags Panel
         JPanel leftPanel = new JPanel(new BorderLayout());
+        leftPanel.setBackground(backgroundColor);
         // Title and search panel
         JPanel upPanel = new JPanel(new GridLayout(2,1));
+        upPanel.setBackground(backgroundColor);
         
         // Title image
         ImageIcon icon = new ImageIcon("../MyGameList.png");
@@ -55,6 +61,7 @@ public class GameManagerGUI {
 
         // Game Management Panel
         JPanel gamePanel = new JPanel(new FlowLayout());
+        gamePanel.setBackground(backgroundColor);
         JButton addGameButton = CustomButton.createButton("Add Game", 100, 50);
         JButton deleteGameButton = CustomButton.createButton("Remove Game", 100, 50);
         gamePanel.add(addGameButton);
@@ -62,6 +69,7 @@ public class GameManagerGUI {
         
         // Search
         JPanel searchPanel = new JPanel(new FlowLayout());
+        searchPanel.setBackground(backgroundColor);
         JTextField searchTextField = new RoundTextField(20);
         JButton searchButton =  CustomButton.createButton("🔍", 100, 30);
         searchPanel.add(searchTextField);
@@ -69,14 +77,22 @@ public class GameManagerGUI {
         upPanel.add(searchPanel);
         
         // Filters
-        JPanel filtersPanel = new JPanel();
-        filtersPanel.setLayout(new BoxLayout(filtersPanel, BoxLayout.Y_AXIS));
+        JPanel empty = new JPanel();
+        empty.setBackground(backgroundColor);
+        JPanel filtersPanel = new JPanel(new GridLayout(3,2));
+        //filtersPanel.setLayout(new BoxLayout(filtersPanel, BoxLayout.Y_AXIS));
+        filtersPanel.setBackground(backgroundColor);
+        
         JComboBox<String> filtersComboBox = new JComboBox<String>(new String[] {"Default", "A-Z","Z-A","Release Date","Date Added"});
+        filtersComboBox.setBackground(new Color(135,177,214));
+        
         JComboBox<String> playedComboBox = new JComboBox<String>(new String[] {"All","Played","Not Played"});
+        playedComboBox.setBackground(new Color(135,177,214));
+        
         filtersPanel.add(filtersComboBox);
-        filtersPanel.add(new JPanel());
+        filtersPanel.add(empty);
         filtersPanel.add(playedComboBox);
-        filtersPanel.add(new JPanel());
+        filtersPanel.add(empty);
         leftPanel.add(filtersPanel, BorderLayout.NORTH);
 
         // Game Management main Panel
@@ -87,10 +103,10 @@ public class GameManagerGUI {
         gamePanel.add(deleteTagButton);
         gamePanel.add(saveButton);
         
-        leftPanel.add((CheckBoxPanel.tagFilterPanel(tagsManager, gameManager, gt)), BorderLayout.CENTER);
-        frame.add(upPanel, BorderLayout.NORTH);
-        frame.add(leftPanel, BorderLayout.WEST);
-        frame.add(gamePanel, BorderLayout.SOUTH);
+        leftPanel.add((CheckBoxPanel.tagFilterPanel(tagsManager, gameManager, gt, backgroundColor)), BorderLayout.CENTER);
+        mainPanel.add(upPanel, BorderLayout.NORTH);
+        mainPanel.add(leftPanel, BorderLayout.WEST);
+        mainPanel.add(gamePanel, BorderLayout.SOUTH);
         
         // Table for displaying games
         String[] columnNames = {"Title", "Release Date", "Date Added", "Tags", "Played"};
@@ -98,7 +114,8 @@ public class GameManagerGUI {
         JTable gameTable = gt.createTable();
         gameTable.getColumnModel().getColumn(4).setCellRenderer(new EmojiRenderer());
         JScrollPane scrollPane = new JScrollPane(gameTable);
-        frame.add(scrollPane, BorderLayout.CENTER);
+        scrollPane.getViewport().setBackground(backgroundColor);
+        mainPanel.add(scrollPane, BorderLayout.CENTER);
 
         // Button Action Listeners
         addGameButton.addActionListener(new ActionListener() {
@@ -167,7 +184,8 @@ public class GameManagerGUI {
         		gt.updateGameTable(gameManager);
         	}
         });
-        
+        frame.setContentPane(mainPanel);
+        frame.getContentPane().setBackground(backgroundColor);
         frame.setVisible(true);
         gt.updateGameTable(gameManager);
     }
@@ -190,7 +208,7 @@ public class GameManagerGUI {
         JCheckBox playedCheckBox = new JCheckBox("Played");
         
         
-        List<JCheckBox> tagsCheckBoxList = CheckBoxPanel.checkBoxList(tagsManager);
+        List<JCheckBox> tagsCheckBoxList = CheckBoxPanel.checkBoxList(tagsManager,backgroundColor);
 
         JButton addTagButton = new JButton("New Tag");
         addTagButton.addActionListener(new ActionListener() {
