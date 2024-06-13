@@ -325,7 +325,7 @@ public class GameManagerGUI {
         JDialog dialog = new JDialog(frame, "Add Tag", true);
    
        
-        dialog.setSize(500, 250);
+        dialog.setSize(400, 250);
         dialog.setBackground(backgroundColor);
         
         JPanel addTagPanel = new JPanel();
@@ -333,16 +333,23 @@ public class GameManagerGUI {
 
         JLabel nameLabel = new JLabel("Tag Name:");
         nameLabel.setBackground(backgroundColor);
-        JPanel useless = new JPanel();
-        JTextField nameField = new RoundTextField(10);
+        JTextField nameField = new RoundTextField(15);
         nameField.setBorder(new EmptyBorder(2, 2, 2, 0));
         
         JLabel descriptionLabel = new JLabel("Description:");
-        JTextField descriptionField = new RoundTextField(20);
-        JPanel fieldPanel = new JPanel();
-        fieldPanel.add(descriptionField);
-        fieldPanel.add(nameField);
-        JButton addButton = CustomButton.createButton("Add", 200, 50);
+        JTextField descriptionField = new RoundTextField(15);
+        
+        JPanel nameFieldPanel = new JPanel();
+        nameFieldPanel.setBackground(backgroundColor);
+        nameFieldPanel.setBorder(new EmptyBorder(20,0,0,0));
+        nameFieldPanel.add(nameField);
+        
+        JPanel descriptionFieldPanel = new JPanel();
+        descriptionFieldPanel.setBackground(backgroundColor);
+        descriptionFieldPanel.setBorder(new EmptyBorder(20,0,0,0));
+        descriptionFieldPanel.add(descriptionField);
+        
+        JButton addButton = CustomButton.createButton("Add", 150, 50);
         addButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 String name = nameField.getText();
@@ -359,9 +366,9 @@ public class GameManagerGUI {
         addButton.setBorder(new EmptyBorder(2, 2, 2, 0));
         aux.setBackground(backgroundColor);
         addTagPanel.add(nameLabel);
-        addTagPanel.add(nameField);
+        addTagPanel.add(nameFieldPanel);
         addTagPanel.add(descriptionLabel);
-        addTagPanel.add(descriptionField);
+        addTagPanel.add(descriptionFieldPanel);
         addTagPanel.add(new JLabel()); // Empty cell
         addTagPanel.add(aux);
         
@@ -375,22 +382,19 @@ public class GameManagerGUI {
      */
     private void showDeleteTagDialog() {
         JDialog dialog = new JDialog(frame, "Delete Tag", true);
-        dialog.setLayout(new GridLayout(2, 2));
         dialog.setSize(300, 150);
+        
+        JPanel deleteTagPanel = new JPanel();
+        deleteTagPanel.setLayout(new GridLayout(2, 2));
 
         JLabel nameLabel = new JLabel("Tag Name:");
         JPanel tagsPanel = new JPanel();
-        List<JCheckBox> tagsCheckBoxList = new ArrayList<JCheckBox>();
-
-        List<Tag> tagList = tagsManager.getTagList();
-        if (tagList != null) {
-            for (Tag tag : tagList) {
-            	JCheckBox tags = new JCheckBox(tag.getTagName());
-                tagsCheckBoxList.add(tags);
-            }
-        }
-
-        JButton deleteButton = new JButton("Delete");
+        List<JCheckBox> tagsCheckBoxList = CheckBoxPanel.checkBoxList(tagsManager,backgroundColor);
+        
+        JPanel deleteButtonPanel = new JPanel();
+        deleteButtonPanel.setBorder(new EmptyBorder(5,0,0,5));
+        deleteButtonPanel.setBackground(backgroundColor);
+        JButton deleteButton = CustomButton.createButton("Delete", 140, 40);
         deleteButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
             	List<String> selectedTagList = new ArrayList<String>();
@@ -404,16 +408,23 @@ public class GameManagerGUI {
 		                }
             }
         });
+        deleteButtonPanel.add(deleteButton);
         
         for(JCheckBox tagsCheckBox : tagsCheckBoxList)
         	tagsPanel.add(tagsCheckBox);
+        tagsPanel.setBackground(backgroundColor);
         JScrollPane tagsScrollPane = new JScrollPane(tagsPanel);
+        tagsScrollPane.setBackground(backgroundColor);
+        tagsScrollPane.setBorder(new EmptyBorder(0,0,0,0));
+        tagsScrollPane.getHorizontalScrollBar().setBackground(backgroundColor);
         
-        dialog.add(nameLabel);
-        dialog.add(tagsScrollPane);
-        dialog.add(new JLabel()); // Empty cell
-        dialog.add(deleteButton);
-
+        deleteTagPanel.add(nameLabel);
+        deleteTagPanel.add(tagsScrollPane);
+        deleteTagPanel.add(new JLabel()); // Empty cell
+        deleteTagPanel.add(deleteButtonPanel);
+        
+        dialog.setContentPane(deleteTagPanel);
+        dialog.getContentPane().setBackground(backgroundColor);
         dialog.setVisible(true);
     }
 
