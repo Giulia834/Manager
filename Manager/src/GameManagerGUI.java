@@ -116,19 +116,19 @@ public class GameManagerGUI {
         filtersComboBox.addActionListener(new ActionListener() {
         	public void actionPerformed(ActionEvent e) {
         		if (filtersComboBox.getSelectedItem().equals("A-Z")) {
-        			gameManager.gameList.sort(3);
-        			updateGameTable();
-        		}
-        		else if (filtersComboBox.getSelectedItem().equals("Z-A")) {
         			gameManager.gameList.sort(0);
         			updateGameTable();
         		}
-        		else if (filtersComboBox.getSelectedItem().equals("Release Date")) {
+        		else if (filtersComboBox.getSelectedItem().equals("Z-A")) {
         			gameManager.gameList.sort(1);
         			updateGameTable();
         		}
-        		else {
+        		else if (filtersComboBox.getSelectedItem().equals("Release Date")) {
         			gameManager.gameList.sort(2);
+        			updateGameTable();
+        		}
+        		else {
+        			gameManager.gameList.sort(3);
         			updateGameTable();
         		}
         	}
