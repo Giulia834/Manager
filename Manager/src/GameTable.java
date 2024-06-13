@@ -7,6 +7,7 @@ import java.util.List;
 
 import javax.swing.JTable;
 import javax.swing.SwingConstants;
+import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.JTableHeader;
@@ -57,12 +58,12 @@ public class GameTable {
         gameTable.setBackground(new Color(135,206,235));
         gameTable.getTableHeader().setReorderingAllowed(false);
         gameTable.setShowVerticalLines(false);
-        
+       
         // Customize table header
         JTableHeader tableHeader = gameTable.getTableHeader();
         tableHeader.setPreferredSize(new Dimension(tableHeader.getWidth(), 40)); // Set header height
         tableHeader.setDefaultRenderer(new HeaderRenderer());
-
+        
         return gameTable;
     }
 

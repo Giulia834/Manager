@@ -1,6 +1,7 @@
 
 
 import javax.swing.*;
+import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 import java.awt.*;
@@ -117,8 +118,10 @@ public class GameManagerGUI {
         JTable gameTable = gt.createTable();
         gameTable.getColumnModel().getColumn(4).setCellRenderer(new EmojiRenderer());
         JScrollPane scrollPane = new JScrollPane(gameTable);
-        scrollPane.getViewport().setBackground(backgroundColor);
-        mainPanel.add(scrollPane, BorderLayout.CENTER);
+        scrollPane.setBorder(null);
+        scrollPane.setBorder(new EmptyBorder(0, 10, 10, 10)); // Remove border from JScrollPane
+        scrollPane.getViewport().setOpaque(false); // Ensure the viewport is transparent
+        frame.add(scrollPane, BorderLayout.CENTER);
 
         // Button Action Listeners
         addGameButton.addActionListener(new ActionListener() {
