@@ -22,6 +22,9 @@ public class GameManagerGUI {
     private TagManager tagsManager;
     private GameManager gameManager;
     private DefaultTableModel tableModel;
+    
+    private GameTable gt;
+
     /**
      * 
      */
@@ -52,15 +55,15 @@ public class GameManagerGUI {
 
         // Game Management Panel
         JPanel gamePanel = new JPanel(new FlowLayout());
-        JButton addGameButton = new JButton("Add Game");
-        JButton deleteGameButton = new JButton("Delete Game");
+        JButton addGameButton = CustomButton.createButton("Add Game", 100, 50);
+        JButton deleteGameButton = CustomButton.createButton("Remove Game", 100, 50);
         gamePanel.add(addGameButton);
         gamePanel.add(deleteGameButton);
         
         // Search
         JPanel searchPanel = new JPanel(new FlowLayout());
-        JTextField searchTextField = new JTextField(20);
-        JButton searchButton = new CustomButton().createButton("🔍", 50, 30);
+        JTextField searchTextField = new RoundTextField(20);
+        JButton searchButton =  CustomButton.createButton("🔍", 100, 30);
         searchPanel.add(searchTextField);
         searchPanel.add(searchButton);
         upPanel.add(searchPanel);
@@ -77,22 +80,22 @@ public class GameManagerGUI {
         leftPanel.add(filtersPanel, BorderLayout.NORTH);
 
         // Game Management main Panel
-        JButton addTagButton = new JButton("Add Tag");
-        JButton deleteTagButton = new JButton("Delete Tag");
-        JButton saveButton = new JButton("Save");
+        JButton addTagButton =  CustomButton.createButton("Add Tag", 100, 50);
+        JButton deleteTagButton =  CustomButton.createButton("Delet Tag", 100, 50);
+        JButton saveButton =  CustomButton.createButton("Save", 100, 50);
         gamePanel.add(addTagButton);
         gamePanel.add(deleteTagButton);
         gamePanel.add(saveButton);
         
-        leftPanel.add((CheckBoxPanel.tagFilterPanel(tagsManager, gameManager, this)), BorderLayout.CENTER);
+        leftPanel.add((CheckBoxPanel.tagFilterPanel(tagsManager, gameManager, gt)), BorderLayout.CENTER);
         frame.add(upPanel, BorderLayout.NORTH);
         frame.add(leftPanel, BorderLayout.WEST);
         frame.add(gamePanel, BorderLayout.SOUTH);
         
         // Table for displaying games
         String[] columnNames = {"Title", "Release Date", "Date Added", "Tags", "Played"};
-        tableModel = new DefaultTableModel(columnNames, 0);
-        JTable gameTable = new JTable(tableModel);
+        gt = new GameTable();
+        JTable gameTable = gt.createTable();
         gameTable.getColumnModel().getColumn(4).setCellRenderer(new EmojiRenderer());
         JScrollPane scrollPane = new JScrollPane(gameTable);
         frame.add(scrollPane, BorderLayout.CENTER);
@@ -133,7 +136,7 @@ public class GameManagerGUI {
             public void actionPerformed(ActionEvent e) {
             	String gameName = searchTextField.getText();
                 gameManager.searchGame(gameName);
-                updateGameTable();
+                gt.updateGameTable(gameManager);
             }
         });
         
@@ -141,19 +144,19 @@ public class GameManagerGUI {
         	public void actionPerformed(ActionEvent e) {
         		if (filtersComboBox.getSelectedItem().equals("A-Z")) {
         			gameManager.gameList.sort(0);
-        			updateGameTable();
+        			gt.updateGameTable(gameManager);
         		}
         		else if (filtersComboBox.getSelectedItem().equals("Z-A")) {
         			gameManager.gameList.sort(1);
-        			updateGameTable();
+        			gt.updateGameTable(gameManager);
         		}
         		else if (filtersComboBox.getSelectedItem().equals("Release Date")) {
         			gameManager.gameList.sort(2);
-        			updateGameTable();
+        			gt.updateGameTable(gameManager);
         		}
         		else if (filtersComboBox.getSelectedItem().equals("Date Added")) {
         			gameManager.gameList.sort(3);
-        			updateGameTable();
+        			gt.updateGameTable(gameManager);
         		}
         	}
         });
@@ -161,12 +164,12 @@ public class GameManagerGUI {
         playedComboBox.addActionListener(new ActionListener() {
         	public void actionPerformed(ActionEvent e) {
         		gameManager.filterByPlayed(playedComboBox.getSelectedItem().toString());
-        		updateGameTable();
+        		gt.updateGameTable(gameManager);
         	}
         });
         
         frame.setVisible(true);
-        updateGameTable();
+        gt.updateGameTable(gameManager);
     }
     
     /**
@@ -239,7 +242,7 @@ public class GameManagerGUI {
                 Game game = new Game(name, selectedTags, releaseDate, played);
                 if (!gameManager.gameList.addGame(game))
                 	JOptionPane.showMessageDialog(dialog, "This name is already used.", "Error", JOptionPane.ERROR_MESSAGE);
-                updateGameTable();
+                gt.updateGameTable(gameManager);
                 dialog.dispose();
             }
         });
@@ -354,28 +357,9 @@ public class GameManagerGUI {
         if (selectedRow != -1) {
             String gameName = (String) gameTable.getValueAt(selectedRow, 0);
             gameManager.gameList.deleteGame(gameName);
-            updateGameTable();
+           
         }
     }
-    
-    /**
-     * 
-     */
-    void updateGameTable() {
-        tableModel.setRowCount(0);
-        List<Game> gameList = gameManager.getGameList();
-        if (gameList != null) {
-            for (Game game : gameList) {
-                String tags = game.getTags() != null ? game.getTags().toString() : "";
-                tableModel.addRow(new Object[]{game.getName(), game.getReleaseDate(), game.getDateAdded(), tags, game.getPlayed()});
-            }
-        }
-    }
-    
-    /**
-     * 
-     * @param args
-     */
     public static void main(String[] args) {
         EventQueue.invokeLater(new Runnable() {
             public void run() {

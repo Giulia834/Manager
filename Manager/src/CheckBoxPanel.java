@@ -24,9 +24,9 @@ public class CheckBoxPanel {
 	 * @param gameManagerGUI
 	 * @return
 	 */
-	public static JScrollPane tagFilterPanel(TagManager tagManager, GameManager gameManager, GameManagerGUI gameManagerGUI) {
+	public static JScrollPane tagFilterPanel(TagManager tagManager, GameManager gameManager, GameTable gt) {
 		List<JCheckBox> tagsCheckBoxList = checkBoxList(tagManager);
-		filterCheckBox(tagsCheckBoxList, tagManager, gameManager,gameManagerGUI);
+		filterCheckBox(tagsCheckBoxList, tagManager, gameManager,gt);
       JPanel tagsPanel = new JPanel();
       tagsPanel.setLayout(new BoxLayout(tagsPanel, BoxLayout.Y_AXIS));
       for(JCheckBox tagCheckBox : tagsCheckBoxList)
@@ -59,7 +59,7 @@ public class CheckBoxPanel {
 	 * @param gameManager
 	 * @param gameManagerGUI
 	 */
-	private static void filterCheckBox(List<JCheckBox> tagsCheckBoxList, TagManager tagManager, GameManager gameManager, GameManagerGUI gameManagerGUI) {
+	private static void filterCheckBox(List<JCheckBox> tagsCheckBoxList, TagManager tagManager, GameManager gameManager, GameTable gt) {
 		 for(JCheckBox tagCheckBox: tagsCheckBoxList) {
 	    	  tagCheckBox.addActionListener(  new ActionListener() {
 					@Override
@@ -76,7 +76,7 @@ public class CheckBoxPanel {
 						if(tagList.isEmpty())
 							gameManager.filterByTag(tagList, false);
 						gameManager.filterByTag(tagList, true);
-						gameManagerGUI.updateGameTable();
+						gt.updateGameTable(gameManager);
 							
 					}
 	    	  });
