@@ -36,10 +36,14 @@ public class TagManager {
 	 * @param name Name of the new tag
 	 * @param description Short description of the new tag
 	 */
-	public void addTag(String name, String description) {
+	public boolean addTag(String name, String description) {
+		for(Tag tag: tagList)
+			if(name.equals(tag.getTagName()))
+					return false;
 		Tag t = new Tag(name, description);
 		tagList.add(t);	
 		tagDict.put(name, t);
+		return true;
 	}
 	/**
 	 * Attempt to remove the specified game from the game list. If successful, return true; otherwise, return false.

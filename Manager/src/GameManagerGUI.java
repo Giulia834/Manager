@@ -257,7 +257,10 @@ public class GameManagerGUI {
             public void actionPerformed(ActionEvent e) {
                 String name = nameField.getText();
                 String description = descriptionField.getText();
-                tagsManager.addTag(name, description);
+                if(!tagsManager.addTag(name, description)) {
+                	JOptionPane.showMessageDialog(dialog, "Name is already used", "Erro", JOptionPane.ERROR_MESSAGE);
+                	return;
+                }
                 dialog.dispose();
             }
         });
