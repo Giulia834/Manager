@@ -26,7 +26,7 @@ public class CustomButton {
 	public static JButton createButton(String text, int height, int width){
 		
 		
-		JButton newButton =  new RoundButton(text, 30, 30, new Color(173, 216, 230));
+		JButton newButton =  new RoundButton(text, 30, 30, new Color(0,191,255));
 		newButton.setPreferredSize(new Dimension(height, width));
 		return newButton;
 		
@@ -58,7 +58,7 @@ class RoundButton extends JButton{
 		addMouseListener(new MouseAdapter() {
 			@Override
 			 public void mouseEntered(MouseEvent e) {
-	                setBackground(new Color(232, 57, 95));
+	                setBackground(new Color(65,105,225));
 	                repaint(); // Request a repaint after changing the background color
 	            }
 

@@ -22,7 +22,7 @@ public class GameManagerGUI {
     private TagManager tagsManager;
     private GameManager gameManager;
     private DefaultTableModel tableModel;
-    private Color backgroundColor = new Color(120,139,171);
+    private Color backgroundColor = new Color(135,206,235);
     
     private GameTable gt;
 
@@ -77,22 +77,24 @@ public class GameManagerGUI {
         upPanel.add(searchPanel);
         
         // Filters
-        JPanel empty = new JPanel();
-        empty.setBackground(backgroundColor);
-        JPanel filtersPanel = new JPanel(new GridLayout(3,2));
-        //filtersPanel.setLayout(new BoxLayout(filtersPanel, BoxLayout.Y_AXIS));
+        JPanel empty1 = new JPanel();
+        empty1.setBackground(backgroundColor);
+        JPanel empty2 = new JPanel();
+        empty2.setBackground(backgroundColor);
+        JPanel filtersPanel = new JPanel();
+        filtersPanel.setLayout(new BoxLayout(filtersPanel, BoxLayout.Y_AXIS));
         filtersPanel.setBackground(backgroundColor);
         
         JComboBox<String> filtersComboBox = new JComboBox<String>(new String[] {"Default", "A-Z","Z-A","Release Date","Date Added"});
-        filtersComboBox.setBackground(new Color(135,177,214));
+        filtersComboBox.setBackground(new Color(30,144,255));
         
         JComboBox<String> playedComboBox = new JComboBox<String>(new String[] {"All","Played","Not Played"});
-        playedComboBox.setBackground(new Color(135,177,214));
+        playedComboBox.setBackground(new Color(30,144,255));
         
         filtersPanel.add(filtersComboBox);
-        filtersPanel.add(empty);
+        filtersPanel.add(empty1);
         filtersPanel.add(playedComboBox);
-        filtersPanel.add(empty);
+        filtersPanel.add(empty2);
         leftPanel.add(filtersPanel, BorderLayout.NORTH);
 
         // Game Management main Panel
@@ -104,6 +106,7 @@ public class GameManagerGUI {
         gamePanel.add(saveButton);
         
         leftPanel.add((CheckBoxPanel.tagFilterPanel(tagsManager, gameManager, gt, backgroundColor)), BorderLayout.CENTER);
+        
         mainPanel.add(upPanel, BorderLayout.NORTH);
         mainPanel.add(leftPanel, BorderLayout.WEST);
         mainPanel.add(gamePanel, BorderLayout.SOUTH);

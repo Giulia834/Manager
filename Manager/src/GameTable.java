@@ -53,8 +53,8 @@ public class GameTable {
         gameTable.setFocusable(false);
         gameTable.setIntercellSpacing(new Dimension(0, 0));
         gameTable.setRowHeight(25);
-        gameTable.setSelectionBackground(new Color(232, 57, 95));
-        gameTable.setBackground(new Color(89, 112, 156));
+        gameTable.setSelectionBackground(new Color(65,105,225));
+        gameTable.setBackground(new Color(135,206,235));
         gameTable.getTableHeader().setReorderingAllowed(false);
         gameTable.setShowVerticalLines(false);
         
@@ -69,7 +69,7 @@ public class GameTable {
     static class HeaderRenderer extends DefaultTableCellRenderer {
         public HeaderRenderer() {
             setOpaque(true);
-            setBackground(new Color(173, 216, 230)); // Pastel blue background
+            setBackground(new Color(0,191,255)); // Pastel blue background
             setFont(new Font("Serif", Font.BOLD, 16));
             setForeground(Color.BLACK);
             setHorizontalAlignment(SwingConstants.LEFT);
