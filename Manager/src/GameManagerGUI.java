@@ -11,18 +11,29 @@ import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * 
+ * 
+ * @author Juan Santana
+ * @author Giulia Mendes
+ */
 public class GameManagerGUI {
     private JFrame frame;
     private TagManager tagsManager;
     private GameManager gameManager;
     private DefaultTableModel tableModel;
-
+    /**
+     * 
+     */
     public GameManagerGUI() {
         tagsManager = new TagManager();
         gameManager = new GameManager();
         initialize();
     }
     
+    /**
+     * 
+     */
     private void initialize() {
         frame = new JFrame("Game Manager");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -31,6 +42,13 @@ public class GameManagerGUI {
         
         // Filters and tags Panel
         JPanel leftPanel = new JPanel(new BorderLayout());
+        // Title and search panel
+        JPanel upPanel = new JPanel(new GridLayout(2,1));
+        
+        // Title image
+        ImageIcon icon = new ImageIcon("../MyGameList.png");
+        JLabel titulo = new JLabel(icon, SwingConstants.CENTER);
+        upPanel.add(titulo);
 
         // Game Management Panel
         JPanel gamePanel = new JPanel(new FlowLayout());
@@ -42,9 +60,10 @@ public class GameManagerGUI {
         // Search
         JPanel searchPanel = new JPanel(new FlowLayout());
         JTextField searchTextField = new JTextField(20);
-        JButton searchButton = new JButton("Search");
+        JButton searchButton = new CustomButton().createButton("🔍", 50, 30);
         searchPanel.add(searchTextField);
         searchPanel.add(searchButton);
+        upPanel.add(searchPanel);
         
         // Filters
         JPanel filtersPanel = new JPanel();
@@ -66,7 +85,7 @@ public class GameManagerGUI {
         gamePanel.add(saveButton);
         
         leftPanel.add((CheckBoxPanel.tagFilterPanel(tagsManager, gameManager, this)), BorderLayout.CENTER);
-        frame.add(searchPanel, BorderLayout.NORTH);
+        frame.add(upPanel, BorderLayout.NORTH);
         frame.add(leftPanel, BorderLayout.WEST);
         frame.add(gamePanel, BorderLayout.SOUTH);
         
@@ -149,7 +168,10 @@ public class GameManagerGUI {
         frame.setVisible(true);
         updateGameTable();
     }
-
+    
+    /**
+     * 
+     */
     private void showAddGameDialog() {
         JDialog dialog = new JDialog(frame, "Add Game", true);
         dialog.setLayout(new GridLayout(5, 2));
@@ -232,16 +254,17 @@ public class GameManagerGUI {
         dialog.add(releaseDateField);
         dialog.add(tagsLabel);
         dialog.add(tagsScrollPane);
-        dialog.add(new JLabel());
-        dialog.add(addTagButton);
         dialog.add(new JLabel()); // Empty cell
+        dialog.add(addTagButton);
         dialog.add(playedCheckBox);
         dialog.add(addButton);
 
         dialog.setVisible(true);
     }
     
-
+    /**
+     * 
+     */
     private void showAddTagDialog() {
         JDialog dialog = new JDialog(frame, "Add Tag", true);
         dialog.setLayout(new GridLayout(3, 2));
@@ -274,7 +297,10 @@ public class GameManagerGUI {
 
         dialog.setVisible(true);
     }
-
+    
+    /**
+     * 
+     */
     private void showDeleteTagDialog() {
         JDialog dialog = new JDialog(frame, "Delete Tag", true);
         dialog.setLayout(new GridLayout(2, 2));
@@ -319,7 +345,10 @@ public class GameManagerGUI {
         dialog.setVisible(true);
     }
 
-    
+    /**
+     * 
+     * @param gameTable
+     */
     private void deleteSelectedGame(JTable gameTable) {
         int selectedRow = gameTable.getSelectedRow();
         if (selectedRow != -1) {
@@ -328,7 +357,10 @@ public class GameManagerGUI {
             updateGameTable();
         }
     }
-
+    
+    /**
+     * 
+     */
     void updateGameTable() {
         tableModel.setRowCount(0);
         List<Game> gameList = gameManager.getGameList();
@@ -339,7 +371,11 @@ public class GameManagerGUI {
             }
         }
     }
-
+    
+    /**
+     * 
+     * @param args
+     */
     public static void main(String[] args) {
         EventQueue.invokeLater(new Runnable() {
             public void run() {

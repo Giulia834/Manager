@@ -9,7 +9,20 @@ import java.awt.geom.RoundRectangle2D;
 
 import javax.swing.JButton;
 
+/**
+ * 
+ * 
+ * @author Juan Santana
+ * @author Giulia Mendes
+ */
 public class CustomButton {
+	/**
+	 * 
+	 * @param text
+	 * @param height
+	 * @param width
+	 * @return
+	 */
 	public static JButton createButton(String text, int height, int width){
 		float[] hbs_color = Color.RGBtoHSB(181, 251, 204, null);
 		
@@ -20,10 +33,20 @@ public class CustomButton {
 	}
 
 }
+/**
+ * 
+ */
 class RoundButton extends JButton{
 	private int arcWidth;
 	private int arcHeight;
 	private Color color;
+	/**
+	 * 
+	 * @param label
+	 * @param arcWidth
+	 * @param arcHeight
+	 * @param color
+	 */
 	public RoundButton(String label, int arcWidth, int arcHeight, Color color) {
 		super(label);
 		this.arcWidth = arcWidth;
@@ -52,7 +75,10 @@ class RoundButton extends JButton{
 	            }
 		});
 	 
-}
+	}
+	/**
+	 * 
+	 */
 	protected void paintComponent(Graphics g) {
 		 Graphics2D g2d = (Graphics2D) g.create();
 	        g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
@@ -64,7 +90,9 @@ class RoundButton extends JButton{
 	        g2d.dispose();
 	        super.paintComponent(g);
 	}
-	
+	/**
+	 * 
+	 */
 	@Override 
 	protected void paintBorder(Graphics g){
 		

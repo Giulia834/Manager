@@ -3,11 +3,16 @@ import java.util.List;
 
 import javax.swing.AbstractListModel;
 
+/**
+ * 
+ * 
+ * @author Juan Santana
+ * @author Giulia Mendes
+ */
 public class GameList {
     /**
 	 * 
 	 */
-	
 	protected List<Game>gameList;
  
     /**
@@ -41,22 +46,40 @@ public class GameList {
 			}
 		}
 		return false;
-}
+	}
  
-
- 
+	/**
+	 * 
+	 * @return
+	 */
     public int getSize() {
         return gameList.size();
     }
  
-	
+	/**
+	 * 
+	 * @param index
+	 * @return
+	 */
 	public Game get(int index) {
 		return gameList.get(index);
 		
 	}
+	
+	/**
+	 * 
+	 * @param criterea
+	 */
 	public void sort(int criterea) {
 		quickSort(0, gameList.size()-1, criterea);
 	}
+	
+	/**
+	 * 
+	 * @param begin
+	 * @param end
+	 * @param criterea
+	 */
 	private void quickSort(int begin, int end, int criterea) {
 	    if (begin < end) {
 	        int partitionIndex = partition(begin, end, criterea);
@@ -65,6 +88,14 @@ public class GameList {
 	        quickSort(partitionIndex+1, end, criterea);
 	    }
 	}
+	
+	/**
+	 * 
+	 * @param begin
+	 * @param end
+	 * @param criterea
+	 * @return
+	 */
 	private int partition(int begin, int end, int criterea) {
 	    Game pivot = gameList.get(end);
 	    int i = (begin-1);
