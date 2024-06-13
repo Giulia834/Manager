@@ -10,9 +10,9 @@ import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 
 public class CheckBoxPanel {
-	public static JScrollPane tagFilterPanel(TagManager tagManager, GameManager gameManager, GameManagerGUI gameManagerGUI) {
+	public static JScrollPane tagFilterPanel(TagManager tagManager, GameManager gameManager, GameTable gt) {
 		List<JCheckBox> tagsCheckBoxList = checkBoxList(tagManager);
-		filterCheckBox(tagsCheckBoxList, tagManager, gameManager,gameManagerGUI);
+		filterCheckBox(tagsCheckBoxList, tagManager, gameManager,gt);
       JPanel tagsPanel = new JPanel();
       for(JCheckBox tagCheckBox : tagsCheckBoxList)
       	tagsPanel.add(tagCheckBox);
@@ -30,7 +30,7 @@ public class CheckBoxPanel {
 	      }
 	      return tagsCheckBoxList;
 	}
-	private static void filterCheckBox(List<JCheckBox> tagsCheckBoxList, TagManager tagManager, GameManager gameManager, GameManagerGUI gameManagerGUI) {
+	private static void filterCheckBox(List<JCheckBox> tagsCheckBoxList, TagManager tagManager, GameManager gameManager, GameTable gt) {
 		 for(JCheckBox tagCheckBox: tagsCheckBoxList) {
 	    	  tagCheckBox.addActionListener(  new ActionListener() {
 					@Override
@@ -47,7 +47,7 @@ public class CheckBoxPanel {
 						if(tagList.isEmpty())
 							gameManager.filterByTag(tagList, false);
 						gameManager.filterByTag(tagList, true);
-						gameManagerGUI.updateGameTable();
+						gt.updateGameTable(gameManager);
 							
 					}
 	    	  });
