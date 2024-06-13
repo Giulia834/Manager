@@ -24,7 +24,7 @@ public class GameTable {
         if (gameList != null) {
             for (Game game : gameList) {
                 String tags = game.getTags() != null ? game.getTags().toString() : "";
-                tableModel.addRow(new Object[]{game.getName(), game.getReleaseDate(), game.getDateAdded(), tags, game.getPlayed()});
+                tableModel.addRow(new Object[]{game.getName(), game.getReleaseDate(), game.getDateAdded().toLocalDate(), tags, game.getPlayed()});
             }
         }
     }
@@ -54,6 +54,7 @@ public class GameTable {
         gameTable.setIntercellSpacing(new Dimension(0, 0));
         gameTable.setRowHeight(25);
         gameTable.setSelectionBackground(new Color(232, 57, 95));
+        gameTable.setBackground(new Color(89, 112, 156));
         gameTable.getTableHeader().setReorderingAllowed(false);
         gameTable.setShowVerticalLines(false);
         

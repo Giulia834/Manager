@@ -63,7 +63,7 @@ public class GameManagerGUI {
         JPanel gamePanel = new JPanel(new FlowLayout());
         gamePanel.setBackground(backgroundColor);
         JButton addGameButton = CustomButton.createButton("Add Game", 100, 50);
-        JButton deleteGameButton = CustomButton.createButton("Remove Game", 100, 50);
+        JButton deleteGameButton = CustomButton.createButton("Delet Game", 100, 50);
         gamePanel.add(addGameButton);
         gamePanel.add(deleteGameButton);
         
