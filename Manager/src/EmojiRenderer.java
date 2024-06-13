@@ -13,7 +13,7 @@ public class EmojiRenderer extends DefaultTableCellRenderer {
         JLabel label = (JLabel) super.getTableCellRendererComponent(table, value, isSelected, hasFocus, row, column);
         boolean played = (boolean) value;
         label.setText(played ? "🎮 ✔️" : "🎮 ❌");
-        label.setHorizontalAlignment(SwingConstants.CENTER); // Centraliza o texto
+        label.setHorizontalAlignment(SwingConstants.LEFT); 
         return label;
     }
 }

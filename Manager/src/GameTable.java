@@ -1,16 +1,23 @@
 import java.awt.Color;
+import java.awt.Component;
+import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.GraphicsConfiguration;
 import java.util.List;
 
 import javax.swing.JTable;
+import javax.swing.SwingConstants;
+import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.JTableHeader;
 
 public class GameTable {
 
     private JTable gameTable;
     private DefaultTableModel tableModel;
-    
+    public GameTable(){
+
+    }
     public void updateGameTable(GameManager gameManager ) {
         tableModel.setRowCount(0);
         List<Game> gameList = gameManager.getGameList();
@@ -22,7 +29,6 @@ public class GameTable {
         }
     }
     public JTable createTable() {
-  
         String[] columnNames = {"Title", "Release Date", "Date Added", "Tags", "Played"};
         tableModel = new DefaultTableModel(columnNames, 0);
         gameTable = new JTable(tableModel);
@@ -40,10 +46,38 @@ public class GameTable {
         // Customize table appearance
         gameTable.setFont(new Font("Serif", Font.PLAIN, 16));
         gameTable.setRowHeight(30);
-        gameTable.setShowHorizontalLines(true); // Remove horizontal grid lines
+        gameTable.setShowVerticalLines(false); // Remove vertical grid lines
         gameTable.setOpaque(false); // Make the table background transparent
-       
+        
+        // Additional customizations
+        gameTable.setFocusable(false);
+        gameTable.setIntercellSpacing(new Dimension(0, 0));
+        gameTable.setRowHeight(25);
+        gameTable.setSelectionBackground(new Color(232, 57, 95));
+        gameTable.getTableHeader().setReorderingAllowed(false);
+        gameTable.setShowVerticalLines(false);
+        
+        // Customize table header
+        JTableHeader tableHeader = gameTable.getTableHeader();
+        tableHeader.setPreferredSize(new Dimension(tableHeader.getWidth(), 40)); // Set header height
+        tableHeader.setDefaultRenderer(new HeaderRenderer());
 
         return gameTable;
+    }
+
+    static class HeaderRenderer extends DefaultTableCellRenderer {
+        public HeaderRenderer() {
+            setOpaque(true);
+            setBackground(new Color(173, 216, 230)); // Pastel blue background
+            setFont(new Font("Serif", Font.BOLD, 16));
+            setForeground(Color.BLACK);
+            setHorizontalAlignment(SwingConstants.LEFT);
+        }
+
+        @Override
+        public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus, int row, int column) {
+            super.getTableCellRendererComponent(table, value, isSelected, hasFocus, row, column);
+            return this;
+        }
     }
 }
