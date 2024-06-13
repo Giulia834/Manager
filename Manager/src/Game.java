@@ -91,9 +91,9 @@ public class Game implements Serializable {
     	if(criterea == 1)
     		return this.name.compareToIgnoreCase(game.name) >= 0;
     	if(criterea == 2)
-    		return this.releaseDate.compareTo(game.releaseDate)  >= 0;
+    		return this.releaseDate.compareTo(game.releaseDate) >= 0;
     	if(criterea == 3)
-    		return this.dateAdded.compareTo(game.dateAdded)  >= 0;
+    		return this.dateAdded.compareTo(game.dateAdded) >= 0;
     	return false; 		
     }
 }
