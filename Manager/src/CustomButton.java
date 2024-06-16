@@ -10,18 +10,18 @@ import java.awt.geom.RoundRectangle2D;
 import javax.swing.JButton;
 
 /**
- * 
+ * Customizes a button.
  * 
  * @author Juan Santana
  * @author Giulia Mendes
  */
 public class CustomButton {
 	/**
-	 * 
-	 * @param text
-	 * @param height
-	 * @param width
-	 * @return
+	 * Creates a new round button.
+	 * @param text the name of the new button.
+	 * @param height The height of the new button.
+	 * @param width The width of the new button.
+	 * @return Returns the new button.
 	 */
 	public static JButton createButton(String text, int height, int width){
 		

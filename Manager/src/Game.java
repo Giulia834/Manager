@@ -10,6 +10,9 @@ import java.util.List;
 
 /**
  * Represents a game entity.
+ * 
+ * @author Juan Santana
+ * @author Giulia Mendes
  */
 public class Game implements Serializable {
     private static final long serialVersionUID = 1L;
@@ -80,11 +83,19 @@ public class Game implements Serializable {
         this.dateAdded = LocalDateTime.now();
         this.played = played;
     }
- 
+    /**
+     * Returns if the game was played or not.
+     * @return True if it was played. False otherwise.
+     */
     public boolean getPlayed() {
     	return played;
     }
-    
+    /**
+     * Compares the games according to the given criteria.
+     * @param game
+     * @param criterea
+     * @return
+     */
     public boolean  compare(Game game, int criterea) {
     	if(criterea == 0)
         	return this.name.compareToIgnoreCase(game.name) <= 0;

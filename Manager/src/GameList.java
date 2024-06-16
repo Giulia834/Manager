@@ -4,15 +4,12 @@ import java.util.List;
 import javax.swing.AbstractListModel;
 
 /**
- * 
+ * Represents the game list.
  * 
  * @author Juan Santana
  * @author Giulia Mendes
  */
 public class GameList {
-    /**
-	 * 
-	 */
 	protected List<Game>gameList;
  
     /**
@@ -49,17 +46,17 @@ public class GameList {
 	}
  
 	/**
-	 * 
-	 * @return
+	 * Retrieves the size of the list.
+	 * @return the size of the list
 	 */
     public int getSize() {
         return gameList.size();
     }
  
 	/**
-	 * 
+	 * Retrieves the game at the given index.
 	 * @param index
-	 * @return
+	 * @return the game at the given index.
 	 */
 	public Game get(int index) {
 		return gameList.get(index);
@@ -67,7 +64,7 @@ public class GameList {
 	}
 	
 	/**
-	 * 
+	 * Sorts the game list according to a criteria.
 	 * @param criterea
 	 */
 	public void sort(int criterea) {

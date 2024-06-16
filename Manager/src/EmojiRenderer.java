@@ -7,14 +7,14 @@ import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.TableCellRenderer;
 
 /**
- * 
+ * A class to render an emoji.
  * 
  * @author Juan Santana
  * @author Giulia Mendes
  */
 public class EmojiRenderer extends DefaultTableCellRenderer {
     /**
-     * 
+     * Adds an emoji to the played column of the game table.
      */
 	@Override
     public Component getTableCellRendererComponent(JTable table, Object value,

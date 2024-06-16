@@ -46,7 +46,7 @@ public class TagManager {
 		return true;
 	}
 	/**
-	 * Attempt to remove the specified game from the game list. If successful, return true; otherwise, return false.
+	 * Attempt to remove the specified tag from the tag list. If successful, return true; otherwise, return false.
 	 * @param tagName Name of the tag to delete
 	 * @return True if the tag was successfully removed from the tag list, otherwise false.
 	 */ 

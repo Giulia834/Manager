@@ -12,13 +12,24 @@ import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.JTableHeader;
 
+/**
+ * 
+ */
 public class GameTable {
 
     private JTable gameTable;
     private DefaultTableModel tableModel;
+    /**
+     * Constructs the game table
+     */
     public GameTable(){
 
     }
+    /**
+     * Updates the game table
+     * 
+     * @param gameManager
+     */
     public void updateGameTable(GameManager gameManager ) {
         tableModel.setRowCount(0);
         System.out.println("aaaaa");

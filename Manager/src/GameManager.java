@@ -118,6 +118,7 @@ public class GameManager {
 	}
 	
 	/**
+	 * Filters the games by the selected tag.
 	 * 
 	 * @param selectedTags
 	 * @param filter
@@ -128,8 +129,9 @@ public class GameManager {
 	}
 	
 	/**
+	 * Filters the games by played or not played. By default it is set to All.
 	 * 
-	 * @param p
+	 * @param p String that indicates the selected filter.
 	 */
 	public void filterByPlayed(String p) {
 		if(p.equals("All"))
@@ -141,6 +143,7 @@ public class GameManager {
 	}
 	
 	/**
+	 * Shows the games searched in the table
 	 * 
 	 * @param gameName
 	 */
