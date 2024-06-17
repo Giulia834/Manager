@@ -5,12 +5,10 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
-import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
-import javax.swing.JOptionPane;
+
 
 /**
  * Represents a manager system for class Game
@@ -105,6 +103,7 @@ public class GameManager {
 	/**
 	 * loads the game list from a serialized file
 	 */
+	@SuppressWarnings("unchecked")
 	private void loadGames() {
 		  try (FileInputStream fileIn = new FileInputStream("../data/gameManager.ser");
 		        ObjectInputStream in = new ObjectInputStream(fileIn)) {

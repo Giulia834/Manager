@@ -1,7 +1,6 @@
 import java.util.Collections;
 import java.util.List;
 
-import javax.swing.AbstractListModel;
 
 /**
  * Represents the game list.
@@ -65,32 +64,35 @@ public class GameList {
 	
 	/**
 	 * Sorts the game list according to a criteria.
-	 * @param criterea
+	 * @param criteria
 	 */
 	public void sort(int criterea) {
 		quickSort(0, gameList.size()-1, criterea);
 	}
 	
 	/**
-	 * 
-	 * @param begin
-	 * @param end
-	 * @param criterea
+	 * Sort the elements of game list using a specific  criteria
+	 * @param begin First indice of array
+	 * @param end Last indice of array
+	 * @param criteria Represents the sort criteria: 0 - alphabetic order
+	 * 												 1 - inverse alphabetic order
+	 * 												 2 - release date
+	 * 												 3 - date added
 	 */
-	private void quickSort(int begin, int end, int criterea) {
+	private void quickSort(int begin, int end, int  criteria) {
 	    if (begin < end) {
-	        int partitionIndex = partition(begin, end, criterea);
+	        int partitionIndex = partition(begin, end,  criteria);
 
-	        quickSort(begin, partitionIndex-1, criterea);
-	        quickSort(partitionIndex+1, end, criterea);
+	        quickSort(begin, partitionIndex-1,  criteria);
+	        quickSort(partitionIndex+1, end,  criteria);
 	    }
 	}
 	
 	/**
 	 * 
-	 * @param begin
-	 * @param end
-	 * @param criterea
+	 * @param begin First indice of partition
+	 * @param end Last indice of partition
+	 * @param  criteria represents the sort criteria:
 	 * @return
 	 */
 	private int partition(int begin, int end, int criterea) {

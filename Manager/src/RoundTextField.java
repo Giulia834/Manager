@@ -11,7 +11,11 @@ import javax.swing.JTextField;
  * @author Giulia Mendes
  */
 public class RoundTextField extends JTextField {
-    private Shape shape;
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	private Shape shape;
     /**
      * 
      * @param size

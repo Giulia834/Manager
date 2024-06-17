@@ -37,9 +37,12 @@ public class CustomButton {
  * 
  */
 class RoundButton extends JButton{
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private int arcWidth;
 	private int arcHeight;
-	private Color color;
 	/**
 	 * 
 	 * @param label
@@ -53,7 +56,6 @@ class RoundButton extends JButton{
 		this.arcHeight = arcHeight;
 		setContentAreaFilled(false);
 		setFocusPainted(false);
-		this.color = color;
 		setBackground(color);
 		addMouseListener(new MouseAdapter() {
 			@Override

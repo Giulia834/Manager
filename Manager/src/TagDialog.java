@@ -84,6 +84,7 @@ public class TagDialog {
     
     /**
      * Shows the dialog to delete a tag
+     * 
      */
     public static void showDeleteTagDialog(JFrame frame, TagManager tagsManager, Color backgroundColor) {
         JDialog dialog = new JDialog(frame, "Delete Tag", true);

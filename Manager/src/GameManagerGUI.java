@@ -2,15 +2,10 @@
 
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
-import javax.swing.table.DefaultTableCellRenderer;
-import javax.swing.table.DefaultTableModel;
+
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.time.LocalDate;
-import java.time.format.DateTimeParseException;
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * 
@@ -22,9 +17,7 @@ public class GameManagerGUI {
     private JFrame frame;
     private TagManager tagsManager;
     private GameManager gameManager;
-    private DefaultTableModel tableModel;
     private Color backgroundColor = new Color(135,206,235);
-    
     private GameTable gt;
 
     /**
@@ -117,7 +110,6 @@ public class GameManagerGUI {
         mainPanel.add(gamePanel, BorderLayout.SOUTH);
         
         // Table for displaying games
-        String[] columnNames = {"Title", "Release Date", "Date Added", "Tags", "Played"};
         JTable gameTable = gt.createTable();
         gameTable.getColumnModel().getColumn(4).setCellRenderer(new EmojiRenderer());
         JScrollPane scrollPane = new JScrollPane(gameTable);
@@ -215,7 +207,8 @@ public class GameManagerGUI {
     }
     public static void main(String[] args) {
         EventQueue.invokeLater(new Runnable() {
-            public void run() {
+            @SuppressWarnings("unused")
+			public void run() {
                 try {
                     GameManagerGUI window = new GameManagerGUI();
                 } catch (Exception e) {

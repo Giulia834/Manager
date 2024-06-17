@@ -6,7 +6,6 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
-import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -74,7 +73,7 @@ public class TagManager {
 		   if (!directory.exists()) 
 		             directory.mkdirs(); // Create the directory and any necessary parent directories
 		       
-		     FileOutputStream fileOut = new FileOutputStream("../data/gameTags.ser");
+		     FileOutputStream fileOut = new FileOutputStream(filePath);
 		     ObjectOutputStream out = new ObjectOutputStream(fileOut); 
 		     out.writeObject(getTagList());
 		     System.out.println("Serialized data is saved in gameTags.ser");
@@ -94,6 +93,7 @@ public class TagManager {
 	/**
 	 * loads the tag list from a serialized file
 	 */
+	@SuppressWarnings("unchecked")
 	private void loadTags() {
 	    try (FileInputStream fileIn = new FileInputStream("../data/gameTags.ser");
 	        ObjectInputStream in = new ObjectInputStream(fileIn)) {

@@ -93,17 +93,17 @@ public class Game implements Serializable {
     /**
      * Compares the games according to the given criteria.
      * @param game
-     * @param criterea
+     * @param  criteria  criteria used to compare two games
      * @return
      */
-    public boolean  compare(Game game, int criterea) {
-    	if(criterea == 0)
+    public boolean  compare(Game game, int  criteria) {
+    	if( criteria == 0)
         	return this.name.compareToIgnoreCase(game.name) <= 0;
-    	if(criterea == 1)
+    	if( criteria == 1)
     		return this.name.compareToIgnoreCase(game.name) >= 0;
-    	if(criterea == 2)
+    	if( criteria == 2)
     		return this.releaseDate.compareTo(game.releaseDate)  >= 0;
-    	if(criterea == 3)
+    	if( criteria == 3)
     		return this.dateAdded.compareTo(game.dateAdded)  >= 0;
     	return false; 		
     }

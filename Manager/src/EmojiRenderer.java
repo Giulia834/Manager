@@ -4,7 +4,6 @@ import javax.swing.JLabel;
 import javax.swing.JTable;
 import javax.swing.SwingConstants;
 import javax.swing.table.DefaultTableCellRenderer;
-import javax.swing.table.TableCellRenderer;
 
 /**
  * A class to render an emoji.
@@ -14,6 +13,11 @@ import javax.swing.table.TableCellRenderer;
  */
 public class EmojiRenderer extends DefaultTableCellRenderer {
     /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
+	/**
      * Adds an emoji to the played column of the game table.
      */
 	@Override

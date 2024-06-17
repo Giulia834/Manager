@@ -2,18 +2,15 @@ import java.awt.Color;
 import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.Font;
-import java.awt.GraphicsConfiguration;
 import java.util.List;
-
 import javax.swing.JTable;
 import javax.swing.SwingConstants;
-import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.JTableHeader;
 
 /**
- * 
+ * Creates a custom swing table model
  */
 public class GameTable {
 
@@ -32,7 +29,6 @@ public class GameTable {
      */
     public void updateGameTable(GameManager gameManager ) {
         tableModel.setRowCount(0);
-        System.out.println("aaaaa");
         List<Game> gameList = gameManager.getGameList();
         if (gameList != null) {
             for (Game game : gameList) {
@@ -80,9 +76,14 @@ public class GameTable {
     }
 
     static class HeaderRenderer extends DefaultTableCellRenderer {
-        public HeaderRenderer() {
+        /**
+		 * 
+		 */
+		private static final long serialVersionUID = 1L;
+
+		public HeaderRenderer() {
             setOpaque(true);
-            setBackground(new Color(0,191,255)); // Pastel blue background
+            setBackground(new Color(0,191,255)); // Blue pastel background
             setFont(new Font("Serif", Font.BOLD, 16));
             setForeground(Color.BLACK);
             setHorizontalAlignment(SwingConstants.LEFT);
