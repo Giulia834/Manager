@@ -29,6 +29,10 @@ public class TagManager {
 		tagDict = new HashMap<String, Tag>();
 		loadTags();
 	}
+	public TagManager(List<Tag> tagList, Map<String, Tag> tagDict) {
+		this.tagList = tagList;
+		this.tagDict = tagDict;
+	}
 	
 	/**
 	 * Creates and add a new tag to the tag list
