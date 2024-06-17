@@ -15,6 +15,7 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
+import javax.swing.JScrollPane;
 
 /**
  * 
@@ -86,7 +87,7 @@ public class TagDialog {
      * Shows the dialog to delete a tag
      * 
      */
-    public static void showDeleteTagDialog(JFrame frame, TagManager tagsManager, Color backgroundColor) {
+    public static void showDeleteTagDialog(JFrame frame, JScrollPane tagFilterPanel, TagManager tagsManager, Color backgroundColor) {
         JDialog dialog = new JDialog(frame, "Delete Tag", true);
         dialog.setSize(300, 150);
         
@@ -112,6 +113,7 @@ public class TagDialog {
 		                    tagsManager.deleteTag(tagName);
 		                    dialog.dispose();
 		                }
+	          CheckBoxPanel.removeTagFromPanel(tagFilterPanel,selectedTagList);
             }
         });
         deleteButtonPanel.add(deleteButton);

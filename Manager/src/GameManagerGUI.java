@@ -6,6 +6,7 @@ import javax.swing.border.EmptyBorder;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.List;
 
 /**
  * 
@@ -103,7 +104,8 @@ public class GameManagerGUI {
         gamePanel.add(saveButton);
         
         // Adding the tags filter to the left panel
-        leftPanel.add((CheckBoxPanel.tagFilterPanel(tagsManager, gameManager, gt, backgroundColor)), BorderLayout.CENTER);
+        JScrollPane tagFilterPanel = CheckBoxPanel.tagFilterPanel(tagsManager, gameManager, gt, backgroundColor);
+        leftPanel.add((tagFilterPanel), BorderLayout.CENTER);
         
         mainPanel.add(upPanel, BorderLayout.NORTH);
         mainPanel.add(leftPanel, BorderLayout.WEST);
@@ -140,7 +142,8 @@ public class GameManagerGUI {
 
         deleteTagButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                TagDialog.showDeleteTagDialog(frame, tagsManager, backgroundColor);
+                TagDialog.showDeleteTagDialog(frame, tagFilterPanel, tagsManager, backgroundColor);
+                
             }
         });
 

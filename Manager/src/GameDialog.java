@@ -69,14 +69,11 @@ public class GameDialog {
            public void actionPerformed(ActionEvent e) {
                 TagDialog.showAddTagDialog(frame, tagsManager, backgroundColor);
                 tagsCheckBoxList.clear();
-                List<Tag> tagList = tagsManager.getTagList();
-                if (tagList != null) {
-                    for (Tag tag : tagList) {
-                    	JCheckBox tags = new JCheckBox(tag.getTagName());
-                        tagsCheckBoxList.add(tags);
-                        dialog.dispose();
-                    }
-                }
+                List<JCheckBox> tagsCheckBoxList = CheckBoxPanel.checkBoxList(tagsManager,backgroundColor);
+                for(JCheckBox c: tagsCheckBoxList)
+                	tagsPanel.add(c);
+                tagsPanel.revalidate();
+                tagsPanel.repaint();
             }
         });
         addTagButtonPanel.add(addTagButton);
