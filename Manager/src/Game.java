@@ -107,4 +107,8 @@ public class Game implements Serializable {
     		return this.dateAdded.compareTo(game.dateAdded)  >= 0;
     	return false; 		
     }
+    @Override
+    public String toString() {
+		return name;
+		}
 }
