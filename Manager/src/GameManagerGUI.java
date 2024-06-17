@@ -202,6 +202,7 @@ public class GameManagerGUI {
         if (selectedRow != -1) {
             String gameName = (String) gameTable.getValueAt(selectedRow, 0);
             gameManager.gameList.deleteGame(gameName);
+            gt.updateGameTable(gameManager);
            
         }
     }
