@@ -59,23 +59,22 @@ public class GameManager {
 		else
 			gameListAux = new ArrayList<Game>(gameList.gameList);
 		if(tagFilter) {		
-			if(selectedTags.isEmpty())
-				return gameListAux;
-		
-			for(Game game: gameList.gameList) {
-				boolean selectGame = false;
-				for(Tag tag: selectedTags) {
-					for(Tag gameTag: game.getTags()) {
-						if(gameTag.getTagName().equals(tag.getTagName())) {
-							selectGame = true;
-							break;
+			if(!selectedTags.isEmpty()) {
+				for(Game game: gameList.gameList) {
+					boolean selectGame = false;
+					for(Tag tag: selectedTags) {
+						for(Tag gameTag: game.getTags()) {
+							if(gameTag.getTagName().equals(tag.getTagName())) {
+								selectGame = true;
+								break;
+							}
 						}
+						if(selectGame)
+							break;
 					}
-					if(selectGame)
-						break;
+					if(!selectGame)
+						gameListAux.remove(game);
 				}
-				if(!selectGame)
-					gameListAux.remove(game);
 			}
 		}
 		if(playedFilter != 0) {
@@ -94,7 +93,7 @@ public class GameManager {
 	}
 	
 	/**
-	 * 
+	 * Reset selected tags list
 	 */
 	private void resetSelectedTags() {
 		for(Game game: gameList.gameList)
