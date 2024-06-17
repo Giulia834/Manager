@@ -4,8 +4,10 @@
 
 
 import java.io.Serializable;
+import java.time.Duration;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 /**
@@ -66,8 +68,20 @@ public class Game implements Serializable {
      * Retrieves the date when the game was added.
      * @return The date when the game was added.
      */
-    public LocalDateTime getDateAdded() {
-        return dateAdded;
+    public String getDateAdded() {
+        LocalDateTime now = LocalDateTime.now();
+        Duration duration = Duration.between(dateAdded, now);
+
+        if (duration.isZero()) {
+            return "just added";
+        } else if (duration.toMinutes() < 60) {
+            return "less than a hour";
+        } else if (duration.toHours() < 24) {
+            return duration.toHours() + " hours ago";
+        } else {
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+            return dateAdded.format(formatter);
+        }
     }
 
     /**

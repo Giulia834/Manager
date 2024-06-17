@@ -106,6 +106,7 @@ public class GameManager {
 	/**
 	 * loads the game list from a serialized file
 	 */
+	@SuppressWarnings("unchecked")
 	protected void loadGames() {
 		  try (FileInputStream fileIn = new FileInputStream("../data/gameManager.ser");
 		        ObjectInputStream in = new ObjectInputStream(fileIn)) {

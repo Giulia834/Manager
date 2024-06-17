@@ -33,7 +33,7 @@ public class GameTable {
         if (gameList != null) {
             for (Game game : gameList) {
                 String tags = game.getTags() != null ? game.getTags().toString() : "";
-                tableModel.addRow(new Object[]{game.getName(), game.getReleaseDate(), game.getDateAdded().toLocalDate(), tags, game.getPlayed()});
+                tableModel.addRow(new Object[]{game.getName(), game.getReleaseDate(), game.getDateAdded(), tags, game.getPlayed()});
             }
         }
     }
