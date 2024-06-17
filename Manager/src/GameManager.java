@@ -30,6 +30,9 @@ public class GameManager {
 		loadGames();
 		resetSelectedTags();
 	}
+	public GameManager(List<Game> gameList) {
+		this.gameList.gameList = gameList;
+	}
 	
 	/**
 	 * Saves the game list into a serialized file
