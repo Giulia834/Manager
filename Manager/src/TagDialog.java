@@ -1,4 +1,5 @@
 import java.awt.Color;
+import java.awt.Component;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -15,7 +16,7 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
-import javax.swing.JScrollPane;
+
 
 /**
  * 
@@ -27,7 +28,7 @@ public class TagDialog {
 	/**
      * Shows the dialog to add a tag
      */
-    public static void showAddTagDialog(JFrame frame, TagManager tagsManager, Color backgroundColor) {
+    public static void showAddTagDialog(JFrame frame, JScrollPane tagsFilterPanel, TagManager tagsManager, Color backgroundColor) {
         JDialog dialog = new JDialog(frame, "Add Tag", true);
    
        
@@ -64,6 +65,16 @@ public class TagDialog {
                 	JOptionPane.showMessageDialog(dialog, "Name is already used", "Erro", JOptionPane.ERROR_MESSAGE);
                 	return;
                 }
+                
+                List<JCheckBox> tagsCheckBoxList = CheckBoxPanel.checkBoxList(tagsManager,backgroundColor);
+                JPanel tagPanel = (JPanel) tagsFilterPanel.getViewport().getView();
+                tagPanel.removeAll();
+                for(Component c: tagsCheckBoxList) {
+                	tagPanel.add(c);
+                }
+                
+                tagPanel.revalidate();
+                tagPanel.repaint();
                 dialog.dispose();
             }
         });

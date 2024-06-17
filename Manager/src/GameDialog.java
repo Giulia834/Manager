@@ -28,7 +28,7 @@ public class GameDialog {
 	/**
      * Shows the dialog to add a game in the list
      */
-    public static void showAddGameDialog(JFrame frame, TagManager tagsManager, GameManager gameManager, GameTable gt, Color backgroundColor) {
+    public static void showAddGameDialog(JFrame frame, JScrollPane tagFilterPanel, TagManager tagsManager, GameManager gameManager, GameTable gt, Color backgroundColor) {
         JDialog dialog = new JDialog(frame, "Add Game", true);
         dialog.setSize(400, 300);
         
@@ -67,8 +67,8 @@ public class GameDialog {
         JButton addTagButton = CustomButton.createButton("New Tag",150,40);
         addTagButton.addActionListener(new ActionListener() {
            public void actionPerformed(ActionEvent e) {
-                TagDialog.showAddTagDialog(frame, tagsManager, backgroundColor);
-                tagsCheckBoxList.clear();
+                TagDialog.showAddTagDialog(frame, tagFilterPanel, tagsManager, backgroundColor);
+               
                 List<JCheckBox> tagsCheckBoxList = CheckBoxPanel.checkBoxList(tagsManager,backgroundColor);
                 for(JCheckBox c: tagsCheckBoxList)
                 	tagsPanel.add(c);

@@ -6,7 +6,7 @@ import javax.swing.border.EmptyBorder;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.List;
+
 
 /**
  * 
@@ -124,7 +124,7 @@ public class GameManagerGUI {
         // Button Action Listeners
         addGameButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                GameDialog.showAddGameDialog(frame, tagsManager, gameManager, gt, backgroundColor);
+                GameDialog.showAddGameDialog(frame, tagFilterPanel, tagsManager, gameManager, gt, backgroundColor);
             }
         });
 
@@ -136,7 +136,7 @@ public class GameManagerGUI {
 
         addTagButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                TagDialog.showAddTagDialog(frame, tagsManager, backgroundColor);
+                TagDialog.showAddTagDialog(frame, tagFilterPanel, tagsManager, backgroundColor);
             }
         });
 
