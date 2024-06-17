@@ -36,6 +36,8 @@ public class GameTable {
                 tableModel.addRow(new Object[]{game.getName(), game.getReleaseDate(), game.getDateAdded(), tags, game.getPlayed()});
             }
         }
+        gameTable.validate();
+        gameTable.repaint();
     }
     public JTable createTable() {
         String[] columnNames = {"Title", "Release Date", "Date Added", "Tags", "Played"};
