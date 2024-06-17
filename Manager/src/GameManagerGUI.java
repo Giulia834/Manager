@@ -200,9 +200,9 @@ public class GameManagerGUI {
     private void deleteSelectedGame(JTable gameTable) {
         int selectedRow = gameTable.getSelectedRow();
         if (selectedRow != -1) {
-            String gameName = (String) gameTable.getValueAt(selectedRow, 0);
-            gameManager.gameList.deleteGame(gameName);
-           
+           String gameName = (String) gameTable.getValueAt(selectedRow, 0);
+           gameManager.gameList.deleteGame(gameName);
+           gt.updateGameTable(gameManager);
         }
     }
     public static void main(String[] args) {
