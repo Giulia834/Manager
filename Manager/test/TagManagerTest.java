@@ -6,6 +6,12 @@ import java.util.HashMap;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+/**
+ * Tests the TagManager class.
+ * 
+ * @author Juan Santana
+ * @author Giulia Mendes
+ */
 class TagManagerTest {
 
 	private TagManager tagManager;

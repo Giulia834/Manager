@@ -39,6 +39,10 @@ public class GameTable {
         gameTable.validate();
         gameTable.repaint();
     }
+    /**
+     * Creates the game table.
+     * @return
+     */
     public JTable createTable() {
         String[] columnNames = {"Title", "Release Date", "Date Added", "Tags", "Played"};
         tableModel = new DefaultTableModel(columnNames, 0);
@@ -76,13 +80,15 @@ public class GameTable {
         
         return gameTable;
     }
-
+    /**
+     * 
+     */
     static class HeaderRenderer extends DefaultTableCellRenderer {
-        /**
+
+		private static final long serialVersionUID = 1L;
+		/**
 		 * 
 		 */
-		private static final long serialVersionUID = 1L;
-
 		public HeaderRenderer() {
             setOpaque(true);
             setBackground(new Color(0,191,255)); // Blue pastel background
@@ -90,7 +96,9 @@ public class GameTable {
             setForeground(Color.BLACK);
             setHorizontalAlignment(SwingConstants.LEFT);
         }
-
+		/**
+		 * 
+		 */
         @Override
         public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus, int row, int column) {
             super.getTableCellRendererComponent(table, value, isSelected, hasFocus, row, column);

@@ -1,8 +1,3 @@
-/**
- * Package Manager contains classes related to managing games.
- */
-
-
 import java.io.Serializable;
 import java.time.Duration;
 import java.time.LocalDate;
@@ -121,6 +116,10 @@ public class Game implements Serializable {
     		return this.dateAdded.compareTo(game.dateAdded)  >= 0;
     	return false; 		
     }
+    /**
+     * Returns a string representation of the game (its name).
+     * @return The name of the game.
+     */
     @Override
     public String toString() {
 		return name;

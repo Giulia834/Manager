@@ -19,15 +19,21 @@ import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
 
 /**
- * 
+ * Creates a dialog to add a game in the list
  * 
  * @author Juan Santana
  * @author Giulia Mendes
  */
 public class GameDialog {
 	/**
-     * Shows the dialog to add a game in the list
-     */
+	 * Shows the dialog to add a game in the list.
+	 * @param frame
+	 * @param tagFilterPanel
+	 * @param tagsManager
+	 * @param gameManager
+	 * @param gt The game table.
+	 * @param backgroundColor
+	 */
     public static void showAddGameDialog(JFrame frame, JScrollPane tagFilterPanel, TagManager tagsManager, GameManager gameManager, GameTable gt, Color backgroundColor) {
         JDialog dialog = new JDialog(frame, "Add Game", true);
         dialog.setSize(400, 300);

@@ -5,6 +5,12 @@ import java.util.List;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+/**
+ * Tests the GameManager class.
+ * 
+ * @author Juan Santana
+ * @author Giulia Mendes
+ */
 class GameManagerTest {
 
     private GameManager gameManager;

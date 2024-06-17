@@ -12,7 +12,7 @@ import javax.swing.JScrollPane;
 import javax.swing.border.EmptyBorder;
 
 /**
- * 
+ * Creates custom check box and check box panels.
  * 
  * @author Juan Santana
  * @author Giulia Mendes
@@ -20,11 +20,12 @@ import javax.swing.border.EmptyBorder;
 public class CheckBoxPanel {
 
     /**
-     * 
+     * Creates a scroll pane to the tag filter panel.
      * @param tagManager
      * @param gameManager
-     * @param gameManagerGUI
-     * @return
+     * @param gt The game table.
+     * @param backgroundColor
+     * @return the scroll pane
      */
     public static JScrollPane tagFilterPanel(TagManager tagManager, GameManager gameManager, GameTable gt, Color backgroundColor) {
         List<JCheckBox> tagsCheckBoxList = checkBoxList(tagManager, backgroundColor);
@@ -41,7 +42,12 @@ public class CheckBoxPanel {
 
         return tagsScrollPane;
     }
-
+    
+    /**
+     * Removes a tag from the panel.
+     * @param tagFilterPanel The tag filter panel
+     * @param tagNameList A list with the tags.
+     */
     public static void removeTagFromPanel(JScrollPane tagFilterPanel, List<String> tagNameList) {
         JPanel tagsPanel = (JPanel) tagFilterPanel.getViewport().getView();
         Component[] components = tagsPanel.getComponents();
@@ -66,9 +72,10 @@ public class CheckBoxPanel {
     }
 
     /**
-     * 
+     * Creates a check box list with the background color to put the tags.
      * @param tagManager
-     * @return
+     * @param backgroundColor
+     * @return the check box list.
      */
     public static List<JCheckBox> checkBoxList(TagManager tagManager, Color backgroundColor) {
         List<JCheckBox> tagsCheckBoxList = new ArrayList<JCheckBox>();
@@ -83,11 +90,11 @@ public class CheckBoxPanel {
     }
 
     /**
-     * 
+     * Adds the filter action to the check box. 
      * @param tagsCheckBoxList
      * @param tagManager
      * @param gameManager
-     * @param gameManagerGUI
+     * @param gt The game table.
      */
     private static void filterCheckBox(List<JCheckBox> tagsCheckBoxList, TagManager tagManager, GameManager gameManager, GameTable gt) {
         for (JCheckBox tagCheckBox : tagsCheckBoxList) {

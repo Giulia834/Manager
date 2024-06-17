@@ -13,13 +13,19 @@ public class GameList {
 	protected List<Game>gameList;
  
     /**
-	 * add game to the game list
-	 * @param game Game object
+	 * Constructs a new game list
 	 */
-	public GameList() {}
+	public GameList() {
+		
+	}
 	public GameList(List<Game> gameList) {
 		this.gameList = gameList;
 	}
+	/**
+	 * Add a game to the game list
+	 * @param game Game object
+	 * @return True if successful. False otherwise.
+	 */
 	public boolean addGame(Game game) {
 		for (Game gameInList: gameList) {
 			if (gameInList.getName().equals(game.getName()))
@@ -33,7 +39,6 @@ public class GameList {
     * Attempt to remove the specified game from the game list. If successful, return true; otherwise, return false.
     * @param gameName A string representing the name of the game to be removed
     * @return True if the game was successfully removed from the game list, otherwise false.
-    * @throws java.lang.IllegalArgumentException If the provided argument is incompatible with the expected pattern.
     */
 	public boolean deleteGame(String gameName) {
 		for (Game game: gameList) {
@@ -73,8 +78,8 @@ public class GameList {
 	
 	/**
 	 * Sort the elements of game list using a specific  criteria
-	 * @param begin First indice of array
-	 * @param end Last indice of array
+	 * @param begin First index of array
+	 * @param end Last index of array
 	 * @param criteria Represents the sort criteria: 0 - alphabetic order
 	 * 												 1 - inverse alphabetic order
 	 * 												 2 - release date
@@ -91,8 +96,8 @@ public class GameList {
 	
 	/**
 	 * 
-	 * @param begin First indice of partition
-	 * @param end Last indice of partition
+	 * @param begin First index of partition
+	 * @param end Last index of partition
 	 * @param  criteria represents the sort criteria:
 	 * @return
 	 */
@@ -113,6 +118,9 @@ public class GameList {
 
 	    return i+1;
 	}
+	/**
+	 * Reset the game list.
+	 */
 	void reset() {
 		gameList = new ArrayList<Game>();
 	}

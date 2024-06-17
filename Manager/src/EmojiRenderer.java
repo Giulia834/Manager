@@ -12,9 +12,7 @@ import javax.swing.table.DefaultTableCellRenderer;
  * @author Giulia Mendes
  */
 public class EmojiRenderer extends DefaultTableCellRenderer {
-    /**
-	 * 
-	 */
+	
 	private static final long serialVersionUID = 1L;
 
 	/**

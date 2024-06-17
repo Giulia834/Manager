@@ -17,17 +17,20 @@ import javax.swing.JScrollPane;
 import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
 
-
 /**
- * 
+ * Creates dialogs to add and delete tags.
  * 
  * @author Juan Santana
  * @author Giulia Mendes
  */
 public class TagDialog {
 	/**
-     * Shows the dialog to add a tag
-     */
+	 * Shows the dialog to add a tag.
+	 * @param frame
+	 * @param tagsFilterPanel
+	 * @param tagsManager
+	 * @param backgroundColor
+	 */
     public static void showAddTagDialog(JFrame frame, JScrollPane tagsFilterPanel, TagManager tagsManager, Color backgroundColor) {
         JDialog dialog = new JDialog(frame, "Add Tag", true);
    
@@ -95,8 +98,11 @@ public class TagDialog {
     }
     
     /**
-     * Shows the dialog to delete a tag
-     * 
+     * Shows the dialog to delete a tag.
+     * @param frame
+     * @param tagFilterPanel
+     * @param tagsManager
+     * @param backgroundColor
      */
     public static void showDeleteTagDialog(JFrame frame, JScrollPane tagFilterPanel, TagManager tagsManager, Color backgroundColor) {
         JDialog dialog = new JDialog(frame, "Delete Tag", true);

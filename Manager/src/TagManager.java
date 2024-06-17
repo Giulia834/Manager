@@ -29,6 +29,11 @@ public class TagManager {
 		tagDict = new HashMap<String, Tag>();
 		loadTags();
 	}
+	/**
+	 * Constructs a new Tag Manager object without loading the tag list.
+	 * @param tagList
+	 * @param tagDict
+	 */
 	public TagManager(List<Tag> tagList, Map<String, Tag> tagDict) {
 		this.tagList = tagList;
 		this.tagDict = tagDict;

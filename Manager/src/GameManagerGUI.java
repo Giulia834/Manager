@@ -1,5 +1,3 @@
-
-
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 
@@ -9,7 +7,7 @@ import java.awt.event.ActionListener;
 
 
 /**
- * 
+ * Creates a GUI to interact with the system functionalities.
  * 
  * @author Juan Santana
  * @author Giulia Mendes
@@ -197,7 +195,7 @@ public class GameManagerGUI {
     }
 
     /**
-     * Deletes the selected game
+     * Deletes the selected game from the game list.
      * @param gameTable
      */
     private void deleteSelectedGame(JTable gameTable) {
@@ -209,6 +207,10 @@ public class GameManagerGUI {
            
         }
     }
+    /**
+     * Main method.
+     * @param args
+     */
     public static void main(String[] args) {
         EventQueue.invokeLater(new Runnable() {
             @SuppressWarnings("unused")

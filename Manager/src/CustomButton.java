@@ -34,17 +34,14 @@ public class CustomButton {
 
 }
 /**
- * 
+ * Creates a customized round button.
  */
 class RoundButton extends JButton{
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 1L;
 	private int arcWidth;
 	private int arcHeight;
 	/**
-	 * 
+	 * Creates a colored round button that changes the color with mouse action.
 	 * @param label
 	 * @param arcWidth
 	 * @param arcHeight
@@ -79,7 +76,7 @@ class RoundButton extends JButton{
 	 
 	}
 	/**
-	 * 
+	 * Paints a component.
 	 */
 	protected void paintComponent(Graphics g) {
 		 Graphics2D g2d = (Graphics2D) g.create();
@@ -93,7 +90,7 @@ class RoundButton extends JButton{
 	        super.paintComponent(g);
 	}
 	/**
-	 * 
+	 * Paints the border.
 	 */
 	@Override 
 	protected void paintBorder(Graphics g){
