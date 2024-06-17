@@ -1,3 +1,4 @@
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
@@ -111,6 +112,9 @@ public class GameList {
 	    Collections.swap(gameList, i + 1, end);
 
 	    return i+1;
+	}
+	void reset() {
+		gameList = new ArrayList<Game>();
 	}
 	
     
