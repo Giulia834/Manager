@@ -32,6 +32,6 @@ test: all
 
 # Limpeza
 clean:
-	rm -rf $(BIN_DIR)
+	rmdir /s /q $(BIN_DIR)
 
 .PHONY: all test clean
