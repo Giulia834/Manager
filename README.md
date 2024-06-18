@@ -241,7 +241,7 @@ rm -rf bin
 Obs.: The command make clean won’t work in Linux.  <br>
 Be sure to have jdk installed, if you don’t, run this command before the previous ones: <br>
 ```
-sudo apt install default-jdk <br>
+sudo apt install default-jdk
 ```
 
 - Windows: <br>
