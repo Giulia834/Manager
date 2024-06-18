@@ -19,10 +19,11 @@ Name: Juan Santana 				NUSP: 11954311 <br>
 
 ## Project Description
 Our project is a comprehensive game management system designed to streamline the organization and categorization of games. The core features include the ability to add games and associate them with various tags for easy sorting and retrieval. Here’s a detailed overview of the project: <br>
-### Project Description: Game Management System** <br>
-**Objective**                                                                                                            
+### Project Description: Game Management System
+#### **Objective**                                                                                                            
 The main objective of this project is to develop a user-friendly application that allows users to manage their game collection efficiently. Users can add new games, assign tags to these games, and easily search for and filter games based on their tags. <br>
-**Key Features **
+
+#### **Key Features**
 1. **Add Games:** <br>
 - Users can input details about their games, such as the title, genre, release date, and developer. <br>
 - Each game entry can be enhanced with additional information like a brief description, cover image, and personal ratings. <br>
@@ -226,26 +227,27 @@ Each of the tests succeeded without failures, showing the correctness of the exa
 
 ## Build Procedures
 The following instructions will guide you to compile and run the code using a Makefile. <br>
-Linux: <br>
+- Linux: <br>
+
 Open the terminal in the Manager folder and run the commands in order: <br>
 ```
 make
 make run
 ```
-The command make compiles the files and the command make run runs the class file with the main method. <br>
-If the command make fails, run this command before to clean the bin folder: <br>
+The command make compiles the files and the command make run runs the class file with the main method. If the command make fails, run this command before to clean the bin folder: <br>
 ```
 rm -rf bin
 ```
 Obs.: The command make clean won’t work in Linux.  <br>
 Be sure to have jdk installed, if you don’t, run this command before the previous ones: <br>
+```
 sudo apt install default-jdk <br>
+```
 
+- Windows: <br>
 
-Windows:
 First you have to install GNU Make to run the Makefile. <br>
-Install the Chocolatey for Windows following the instructions [here](chocolatey.org/install). <br>
-After installing the Chocolatey, open the terminal (PowerShell or CMD) and run the command: <br>
+Install the Chocolatey for Windows following the instructions [here](chocolatey.org/install). After installing the Chocolatey, open the terminal (PowerShell or CMD) and run the command: <br>
 ```
 choco install make
 ```
