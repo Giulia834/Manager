@@ -1,7 +1,7 @@
 # Manager
  
-Name: Giulia Pereira Mendes			NUSP: 13687582
-Name: Juan Santana 					NUSP: 11954311
+Name: Giulia Pereira Mendes			NUSP: 13687582 <br>
+Name: Juan Santana 				NUSP: 11954311 <br>
  
 
 ## Requirements
